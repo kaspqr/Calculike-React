@@ -1,0 +1,710 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: peachpuff;
+}
+
+#root {
+    height: 100vh - 100px;
+    background-color: peachpuff;
+}
+
+@keyframes wronganswer {
+    0% {
+        background-color: peachpuff;
+    }
+    99% {
+        background-color: rgba(255, 0, 0, 0.6);
+    }
+    100% {
+        background-color: peachpuff;
+    }
+}
+
+#profileUsername, #aboutHeader {
+    font-size: 5vh;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+}
+
+#aboutTopH3 {
+    padding-top: 2vh;
+}
+
+.pageContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding-top: 10vh;
+    animation-name: wronganswer;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+
+#homePageContent {
+    width: 90vw;
+    text-align: center;
+}
+
+.profileContent {
+    padding-top: 15vh;
+    padding-left: 5vh;
+    padding-right: 5vh;
+    padding-bottom: 5vh;
+}
+
+.homeContent {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#goButton {
+    width: 150px;
+    height: 40px;
+    margin-top: 20px;
+    background-color: papayawhip;
+    border-radius: 5px;
+    font-size: 17px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#goButton:hover {
+    cursor: pointer;
+}
+
+#homeText {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 5vh;
+}
+
+.homeH2, .homeH3, .homeP {
+    width: 100%;
+    text-align: left;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.homeH2 {
+    padding-top: 5vh;
+}
+
+.homeH3 {
+    padding-top: 2vh;
+}
+
+#layoutNavbar {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    width: calc(100vw - (100vw - 100%));
+    background-color: rgb(250, 250, 250);
+    color: white;
+    height: 10vh;
+    border-bottom: 2px solid black;
+    align-items: center;
+}
+
+.buttonList {
+    height: 100%;
+}
+
+.navButton {
+    display: inline-block;
+    min-width: 50px;
+    border: 0;
+    height: 100%;
+    color: black;
+    text-align: center;
+    line-height: 10vh;
+    font-size: 2.5vh;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.navButton a {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+    height: 100%;
+}
+
+.navButton:hover {
+    cursor: pointer;
+}
+
+#settingsButton {
+    float: right;
+    margin-right: 15px;
+}
+
+#settingsPassword {
+    margin-top: 17vh;
+}
+
+#settingsSelect {
+    display: flex;
+    right: 15px;
+    z-index: 1;
+    position: absolute;
+    margin-top: 8vh;
+    text-align: right;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+#loggedInMenu, #loggedOutMenu {
+    display: flex;
+    left: 15px;
+    z-index: 1;
+    position: absolute;
+    margin-top: 8vh;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+#loggedInMenu a, #loggedOutMenu a {
+    text-decoration: none;
+    color: black;
+}
+
+.selectP {
+    background-color: papayawhip;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 1vh;
+    cursor: pointer;
+}
+
+.selectP a {
+    text-decoration: none;
+    color: black;
+}
+
+.selectP:hover {
+    background-color: peachpuff;
+}
+
+#hiscoreButton, #trainButton, #rulesButton {
+    margin-right: 10px;
+}
+
+#loginButton {
+    float: right;
+    margin-right: 15px;
+}
+
+#registerButton {
+    float: right;
+    margin-right: 15px;
+}
+
+#homePage {
+    height: 100vh - 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#scoreDiv,
+#counterDiv,
+#questionDiv,
+#answerDiv {
+    height: 5vh;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 4vh;
+}
+
+#answerDiv {
+    margin-bottom: 10px;
+}
+
+#questionDiv {
+    margin-top: 5vh;
+}
+
+#startDiv {
+    height: calc(20vh + 10px);
+    padding-top: calc(3vh - 10px);
+}
+
+#startButton {
+    width: 100%;
+    background-color: rgb(12, 187, 12);
+    height: 7vh;
+    border-radius: 5px;
+    font-size: 2.5vh;
+    font-weight: bold;
+    box-shadow: 1px 1px 1px 1px rgba(255, 255, 255, 0.3) inset;
+    transition: all 0.1s ease;
+}
+
+#startButton:hover {
+    box-shadow: 1px 1px 1px 3px rgba(255, 255, 255, 0.4) inset; /* Add a bigger shadow on hover */
+    transform: translateY(2px); /* Move the button down on hover */
+}
+
+.digit {
+    background-color: rgb(37, 142, 223);
+    border-style: solid;
+    text-align: center;
+    width: 20vw;
+    height: 20vw;
+    padding: 0;
+    margin: 0;
+}
+
+#calculatorTable {
+    border-collapse: collapse;
+    margin: auto;
+    margin-bottom: 0;
+}
+
+#submitTd {
+    column-span: "2";
+    background-color: rgb(12, 187, 12);
+}
+
+#calculatorField {
+    display: grid;
+    justify-content: center;
+}
+
+.tdButton {
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    width: 100%;
+    font-weight: bold;
+    box-shadow: 1px 1px 1px 1px rgba(255, 255, 255, 0.3) inset;
+    transition: all 0.05s;
+    font-size: 3vh;
+}
+
+.tdButton:active {
+    box-shadow: 1px 1px 1px 3px rgba(255, 255, 255, 0.4) inset; /* Add a bigger shadow on hover */
+    transform: translateY(2px); /* Move the button down on hover */
+}
+
+#delButton {
+    background-color: rgb(255, 170, 0);
+}
+
+#clearButton {
+    background-color: red;
+}
+
+.calcSelect {
+    height: 7vh;
+    width: 49%;
+    padding-top: 2px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 4vh;
+    border: 2px solid black;
+}
+
+.calcSelect:hover {
+    cursor: pointer;
+}
+
+#levelSelect {
+    float: right;
+}
+
+.hsSelect {
+    height: 4vh;
+    width: 40%;
+    margin-left: 2px;
+    margin-right: 2px;
+    border-radius: 5px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 3vh;
+    border: 2px solid black;
+}
+
+.hsSelect:hover {
+    cursor: pointer;
+}
+
+#searchButton {
+    height: 4vh;
+    width: 4vh;
+    margin-left: 2px;
+    margin-right: 2px;
+    background-color: papayawhip;
+    border-radius: 5px;
+}
+
+#searchButton:hover {
+    cursor: pointer;
+}
+
+#userSearchInput {
+    height: 4vh;
+    padding-left: 5px;
+    border-radius: 5px;
+}
+
+#insideForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#hiscoreContent {
+    margin: auto;
+}
+
+#hiscoreTable {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+.hiscoreTr1 {
+    border-top: 2px solid black;
+    height: 5vh;
+    font-size: 2vh;
+    background-color: white;
+}
+
+.hiscoreTr2 {
+    border-top: 2px solid black;
+    height: 5vh;
+    font-size: 2vh;
+    background-color: papayawhip;
+}
+
+.hiscoreTh {
+    height: 5vh;
+    text-align: left;
+    font-size: 2.2vh;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#profileTable {
+    width: 100%;
+    margin: auto;
+    border-collapse: collapse;
+    margin-top: 2vh;
+}
+
+.profileValueTd {
+    text-align: right;
+    border-top: 2px solid black;
+    padding-right: 5px;
+    font-size: 2vh;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.profileKeyTd {
+    border-top: 2px solid black;
+    padding-left: 5px;
+    font-size: 2vh;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.profileTr1 {
+    height: 5vh;
+    background-color: papayawhip;
+}
+
+.profileTr2 {
+    height: 5vh;
+    background-color: white;
+}
+
+.profileScoresTitle {
+    width: 100%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-top: 2vh;
+    text-align: center;
+    font-size: 3vh;
+}
+
+#profileBioDiv, #profileRankDiv, #profilePointsDiv {
+    width: 100%;
+    padding-top: 2vh;
+    text-align: center;
+    font-size: 2vh;
+    margin: auto;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.badgePNG {
+    width: 150px;
+}
+
+#profileRankDiv {
+    font-size: 3vh;
+}
+
+.hiscoreRankTd {
+    padding-left: 7px;
+    width: 15%;
+}
+
+.hiscoreScoreTd {
+    text-align: right;
+    padding-right: 7px;
+    font-family: monospace;
+}
+
+#hiscoreScoreTh {
+    text-align: right;
+    font-size: 2.2vh;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#loginPage {
+    display: flex;
+    justify-content: center;
+    margin-top: 10vh;
+    height: 80vh;
+}
+
+#loginBox {
+    background-color: papayawhip;
+    width: 90vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    border: 2px solid black;
+    
+}
+
+.aboutH3, .aboutH5, .aboutP {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.aboutH3 {
+    font-size: 3.5vh;
+}
+
+.aboutH5 {
+    font-size: 2.5vh;
+}
+
+.aboutP {
+    font-size: 2.5vh;
+}
+
+.rankColor {
+    color: rgb(7, 170, 255);
+}
+
+#settingsSelect a {
+    text-decoration: none;
+    color: black;
+}
+
+input {
+    border: 2px solid black;
+    font-family: monospace;
+}
+
+textarea {
+    border: 2px solid black;
+}
+
+#loginForm {
+    width: 80%;
+    margin-top: 30%;
+}
+
+.changeSettings {
+    width: 80%;
+    margin-top: 3%;
+    display: block;
+}
+
+#changeName {
+    margin-top: 20%;
+}
+
+.countrySelect {
+    width: 100%;
+    height: 7vh;
+}
+.country-select {
+    width: 100%;
+}
+
+#changePassword {
+    padding-top: 20%;
+    width: 80%;
+}
+
+#registerForm {
+    width: 80%;
+    margin-top: 20%;
+}
+
+#usernameDiv {
+    margin-bottom: 7px;
+}
+
+.formLabel {
+    font-size: 2vh;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#usernameInput {
+    width: 100%;
+    height: 7vh;
+    padding-left: 7px;
+}
+
+.fieldInput {
+    width: 100%;
+    height: 7vh;
+    padding-left: 7px;
+}
+
+.textfieldInput {
+    width: 100%;
+    height: 14vh;
+    padding: 7px;
+    resize: none;
+}
+
+.hiscoreTd a {
+    text-decoration: none;
+    color: black;
+    font-family: monospace;
+}
+
+.passwordInput {
+    width: 100%;
+    height: 7vh;
+    padding-left: 7px;
+    margin-bottom: 7px;
+}
+
+#loginSubmitButton {
+    width: 100%;
+    height: 4vh;
+    font-size: 2vh;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-bottom: 7px;
+}
+
+.updateSettingsButton {
+    width: 100%;
+    height: 4vh;
+    font-size: 2vh;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-bottom: 7px;
+    margin-top: 1vh;
+    cursor: pointer;
+}
+
+#registerLink {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    font-size: 2vh;
+}
+
+.errMsg {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: red;
+    margin-top: 20px;
+}
+
+#userSearchTable {
+    padding-top: 5vh;
+}
+
+.userSearchTr {
+    height: 5vh;
+}
+
+.userSearchLink {
+    text-decoration: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: black;
+    font-size: 3vh;
+}
+
+#userSearch404, #userSearchLength {
+    text-align: center;
+}
+
+.successMsg {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: green;
+    margin-top: 20px;
+    background-color: papayawhip;
+}
+
+@media (min-width: 500px) {
+
+    #profileTable, #profileBioDiv, #hiscoreTable, #hiscoreContent, #loginBox {
+        width: calc(500px - 10vh);
+    }
+}
+
+@media (min-width: 450px) {
+    .digit {
+        height: 12vh;
+        width: 12vh;
+    }
+}
+
+@media (max-height: 750px) {
+    #scoreDiv,
+    #counterDiv,
+    #questionDiv,
+    #answerDiv {
+        height: 4vh;
+        font-size: 3vh;
+    }
+
+    #startDiv {
+        height: calc(16vh + 10px);
+        padding-top: calc(2vh - 10px);
+    }
+
+    #questionDiv {
+        margin-top: 4vh;
+    }
+
+    .calcSelect {
+        height: 7vh;
+        font-size: 3vh;
+    }
+
+}
+
+@media (max-width: 449px) {
+    .digit {
+        width: 30vw;
+        height: 20vw;
+    }
+}
+
+@media (min-width: 700px) {
+    .profileContent {
+        margin: auto;
+        width: 680px;
+    }
+}
