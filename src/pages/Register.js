@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from '../api/axios';
 import { axiosPrivate } from '../api/axios';
 import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
@@ -41,7 +40,7 @@ export default function Register() {
         if (pwd === passwordCheck && isValidPassword && isValidUsername) { 
             const newUser = { "user": user, "pwd": pwd }
             try {
-                const response = await axiosPrivate.post(REGISTER_URL, newUser);
+                await axiosPrivate.post(REGISTER_URL, newUser);
                 setUsername('');
                 setPassword('');
                 setPasswordCheck('');

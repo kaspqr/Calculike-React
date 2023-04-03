@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { axiosPrivate } from '../api/axios';
-import useAuth from '../hooks/useAuth';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMedal, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -8,7 +7,6 @@ import { faMedal, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 function Hiscores() {
     const effectRan = useRef(false)
     const USERS_URL = '/users'
-    const { auth } = useAuth()
     const searchRef = useRef('comboall')
     const [hiscoreUsers, setHiscoreUsers] = useState([])
 

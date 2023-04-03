@@ -2,7 +2,7 @@
   "name": "calculike",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://calculike.onrender.com",
+  "homepage": ".",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",

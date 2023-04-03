@@ -1,25 +1,4 @@
-import useAuth from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-
 function Home() {
-
-    const { auth } = useAuth()
-    const navigate = useNavigate()
-
-    const goTrainHandler = () => {
-        navigate('/train')
-    }
-    const goLoginHandler = () => {
-        navigate('/login')
-    }
-
-    const homePageContent = () => {
-        if (auth?.user) {
-            return <button onClick={goTrainHandler} id="goButton">Go Train</button>
-        } else {
-            return <button onClick={goLoginHandler} id="goButton">Login</button>
-        }
-    }
 
     return (
         <div className="profileContent">
