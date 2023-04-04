@@ -242,7 +242,7 @@ const About = () => {
             <img className='badgePNG' src={Expert} alt="Expertbadge" />
             <p className='aboutP'>
                 '<span className='rankColor'>Expert</span>' requires at least 100 000 points. If you reach this level, 
-                you are in the top 1% in the World when it comes to calculating by heart.
+                you are in the top 1% in the world when it comes to calculating by heart.
             </p>
             <br />
             <img className='badgePNG' src={Grandmaster} alt="Grandmasterbadge" />
@@ -259,7 +259,7 @@ const About = () => {
             <p className='aboutP'>
                 '<span className='rankColor'>Pythagoras</span>' requires at least 250 000 points on average. This is the 
                 final level on the platform and is designed to be unreachable for everyone, 
-                except a select few. If you reach this level, you are one in a million. Good luck!
+                except a select few. If you reach this level, you are in the top 0.01%. Good luck!
             </p>
             <hr />
             <br />
