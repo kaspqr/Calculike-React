@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useRefreshToken from '../hooks/useRefreshToken';
 import useAuth from "../hooks/useAuth";
-import { RingLoader } from "react-spinners";
+import RingLoader from "react-spinners/RingLoader";
 
 const Persistlogin = () => {
     const refresh = useRefreshToken();
@@ -28,7 +28,14 @@ const Persistlogin = () => {
       }, [auth?.user, refresh]);
 
     if (loading) {
-        return <RingLoader />
+        return <><RingLoader 
+            color="#000"
+            loading={true}
+            cssOverride={override}
+            size={150}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+        /></>
     }
 
     return (
