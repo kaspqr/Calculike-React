@@ -1,5 +1,4 @@
-import { AuthProvider } from './context/AuthProvider';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import CalculatorField from "./pages/CalculatorField";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
@@ -18,29 +17,25 @@ import Users from './pages/Users';
 function App() {
 
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <Routes>
-          <Route element={<Persistlogin />}>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route element={<RequireAuth />}>
-                <Route path="train" element={<CalculatorField />} />
-                <Route path="changepwd" element={<ChangePwd />} />
-                <Route path="settings" element={<Settings />} />
-              </Route>
-              <Route path="hiscores" element={<Hiscores />} />
-              <Route path="about" element={<About />} />
-              <Route exact path="profiles/:id" element={<Profile />} />
-              <Route path="register" element={<Register />} />
-              <Route path="login" element={<Login />} />
-              <Route path="*" element={<NoPage />} />
-              <Route path="users" element={<Users />} />
-            </Route>
+    <Routes>
+      <Route element={<Persistlogin />}>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route element={<RequireAuth />}>
+            <Route path="train" element={<CalculatorField />} />
+            <Route path="changepwd" element={<ChangePwd />} />
+            <Route path="settings" element={<Settings />} />
           </Route>
-        </Routes>
-      </AuthProvider>
-    </BrowserRouter>
+          <Route path="hiscores" element={<Hiscores />} />
+          <Route path="about" element={<About />} />
+          <Route exact path="profiles/:id" element={<Profile />} />
+          <Route path="register" element={<Register />} />
+          <Route path="login" element={<Login />} />
+          <Route path="*" element={<NoPage />} />
+          <Route path="users" element={<Users />} />
+        </Route>
+      </Route>
+    </Routes>
   )
 }
 
