@@ -31,7 +31,6 @@ const Persistlogin = () => {
         return <><RingLoader 
             color="#000"
             loading={true}
-            cssOverride={true}
             size={150}
             aria-label="Loading Spinner"
             data-testid="loader"
