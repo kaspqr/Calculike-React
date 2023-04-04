@@ -299,7 +299,7 @@ const About = () => {
             <br />
             <p className='aboutP'>
                 With any questions, business inquiries, suggestions, bug reports, complaints, unban appeal, etc., 
-                please contact the developer via email at kasparvella@gmail.com
+                please contact the developer via email at midendcode@gmail.com
             </p>
         </div>
     )
