@@ -27,33 +27,28 @@ export default function Register() {
         if (auth?.user) { navigate('/') }
     }, [])
 
-    function handleLowercase(e) {
-        e.preventDefault();
-        const lowercaseUsername = e.target.value.toLowerCase();
-        setUsername(lowercaseUsername)
-        handleRegister()
-    }
-
-    const handleRegister = async () => {  
+    const handleRegister = async (e) => {  
+        e.preventDefault()
+        const lowercaseUsername = user.toLowerCase()
         document.querySelector('#noPwdMatch').style.display = 'none';
         document.querySelector('#unTaken').style.display = 'none';
         document.getElementById('usernameCheck').style.display = 'none'
         document.getElementById('passwordCheck').style.display = 'none'
 
-        const isValidUsername = validateInput(user, usernameRegex)
+        const isValidUsername = validateInput(lowercaseUsername, usernameRegex)
         const isValidPassword = validateInput(pwd, passwordRegex)
 
         if (pwd === passwordCheck && isValidPassword && isValidUsername) { 
-            const newUser = { "user": user, "pwd": pwd }
+            const newUser = { "user": lowercaseUsername, "pwd": pwd }
             try {
                 await axiosPrivate.post(REGISTER_URL, newUser);
                 setUsername('');
                 setPassword('');
                 setPasswordCheck('');
-                const loginResponse = await axiosPrivate.post(LOGIN_URL, { "user": user, "pwd": pwd });
+                const loginResponse = await axiosPrivate.post(LOGIN_URL, { "user": lowercaseUsername, "pwd": pwd });
                 const accessToken = loginResponse?.data?.accessToken;
                 const id = loginResponse?.data?.id;
-                setAuth({ user, pwd, accessToken, id });
+                setAuth({ "user": lowercaseUsername, pwd, accessToken, id });
                 navigate('/')          
             } catch (err) {
                 if (!err?.response) {
@@ -83,7 +78,7 @@ export default function Register() {
         <div className='homeContent'>
             <div id='loginPage'>
                 <div id='loginBox'>
-                    <form id='registerForm' onSubmit={handleLowercase}>
+                    <form id='registerForm' onSubmit={handleRegister}>
                         <div id='usernameDiv'>
                             <label className='formLabel' htmlFor="user">Username:</label>
                             <input 

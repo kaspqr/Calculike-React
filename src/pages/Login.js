@@ -23,28 +23,23 @@ export default function Login() {
         if (auth?.user) { navigate('/') }
     }, [])
 
-    function handleLowercase(e) {
+    const handleLogin = async (e) => {
         e.preventDefault()
-        const lowercaseUsername = e.target.value.toLowerCase();
-        setUser(lowercaseUsername)
-        handleLogin()
-    }
-
-    const handleLogin = async () => {
+        const lowercaseUsername = user.toLowerCase()
         document.querySelector('#loginMatch').style.display = 'none';
         document.getElementById('banned').style.display = 'none';
 
-        if (!validateInput(user, usernameRegex) || !validateInput(pwd, passwordRegex)) {
+        if (!validateInput(lowercaseUsername, usernameRegex) || !validateInput(pwd, passwordRegex)) {
             document.querySelector('#loginMatch').style.display = 'block';
         } else {
             try {
-                const checkActive = await axiosPrivate.get(`/users/profiles/${user}`)
+                const checkActive = await axiosPrivate.get(`/users/profiles/${lowercaseUsername}`)
                 const active = checkActive?.data?.active
                 if (active) {
-                    const response = await axiosPrivate.post(LOGIN_URL, { user, pwd });
+                    const response = await axiosPrivate.post(LOGIN_URL, { "user": lowercaseUsername, pwd });
                     const accessToken = response?.data?.accessToken;
                     const id = response?.data?.id;
-                    setAuth({ user, pwd, accessToken, id });
+                    setAuth({ "user": lowercaseUsername, pwd, accessToken, id });
                     navigate('/');
                 } else if (!checkActive?.data) {
                     document.getElementById('loginMatch').style.display = 'block';
@@ -71,7 +66,7 @@ export default function Login() {
         <div className='homeContent'>
             <div id='loginPage'>
                 <div id='loginBox'>
-                    <form id='loginForm' onSubmit={handleLowercase}>
+                    <form id='loginForm' onSubmit={handleLogin}>
                         <div id='usernameDiv'>
                             <label className='formLabel' htmlFor="user">Username:</label>
                             <input 

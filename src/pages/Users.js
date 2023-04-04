@@ -14,24 +14,19 @@ const Users = () => {
         return regex.test(inputValue);
     }
 
-    function handleLowercase(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
-        const lowercaseSearch = document.getElementById('userSearchInput').value.toLowercase()
-        setSearchParam(lowercaseSearch)
-        handleSubmit()
-    }
-
-    async function handleSubmit() {
+        const lowercaseSearch = searchParam.toLowerCase()
         document.getElementById('userSearchTBody').innerHTML = ''
         document.getElementById('userSearchLength').style.display = 'none'
         document.getElementById('userSearch404').style.display = 'none'
         if (searchParam.length < 4) {
             document.getElementById('userSearchLength').style.display = 'block'
-        } else if (!validateInput(searchParam, usernameRegex)) {
+        } else if (!validateInput(lowercaseSearch, usernameRegex)) {
             document.getElementById('userSearchLength').style.display = 'block'
         } else {
             const response = await axiosPrivate.get(USERS_URL) 
-            const filteredResponse = response.data.filter(user => user.user.includes(searchParam))
+            const filteredResponse = response.data.filter(user => user.user.includes(lowercaseSearch))
             const activeFiltered = filteredResponse.filter(user => user.active === true)
             if (!activeFiltered.length) {
                 document.getElementById('userSearch404').style.display = 'block'
@@ -45,7 +40,7 @@ const Users = () => {
 
     return (
         <div className='profileContent'>
-            <form onSubmit={handleLowercase}>
+            <form onSubmit={handleSubmit}>
                 <div id='insideForm'>
                     <input 
                         onChange={(e) => { setSearchParam(e.target.value) }} 
