@@ -16,7 +16,7 @@ const Users = () => {
 
     function handleLowercase(e) {
         e.preventDefault()
-        const lowercaseSearch = e.target.value.toLowerCase();
+        const lowercaseSearch = document.getElementById('userSearchInput').value.toLowercase()
         setSearchParam(lowercaseSearch)
         handleSubmit()
     }
