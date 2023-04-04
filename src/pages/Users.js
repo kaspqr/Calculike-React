@@ -31,7 +31,7 @@ const Users = () => {
                 document.getElementById('userSearch404').style.display = 'block'
             } else {
                 activeFiltered.map(user => {
-                    document.getElementById('userSearchTBody').innerHTML += `<tr class="userSearchTr"><td><a class="userSearchLink" href="profiles/${user.user}">${user.user}</a></td></tr>`
+                    document.getElementById('userSearchTBody').innerHTML += `<tr class="userSearchTr"><td><a class="userSearchLink" href="/profiles/${user.user}">${user.user}</a></td></tr>`
                 })
             }
         }
