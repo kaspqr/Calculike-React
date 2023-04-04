@@ -16,10 +16,8 @@ const About = () => {
             <h3 id='aboutTopH3' className='aboutH3'>Introduction</h3>
             <br />
             <p className='aboutP'>
-                The development of Calculite was initially started as 
-                a practice project. 
-                It is a one-man project designed for users to better their 
-                skills at calculating by heart. 
+                Calculike is a free-for-all web application for users to 
+                train their skills in calculating by heart. 
             </p>
             <br />
             <p className='aboutP'>

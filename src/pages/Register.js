@@ -29,6 +29,7 @@ export default function Register() {
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        setUsername(user.toLowerCase())
         document.querySelector('#noPwdMatch').style.display = 'none';
         document.querySelector('#unTaken').style.display = 'none';
         document.getElementById('usernameCheck').style.display = 'none'

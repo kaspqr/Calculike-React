@@ -25,6 +25,7 @@ export default function Login() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setUser(user.toLowerCase())
         document.querySelector('#loginMatch').style.display = 'none';
         document.getElementById('banned').style.display = 'none';
 

@@ -11,14 +11,6 @@ function Home() {
                     <p className="homeP">
                         Calculike deployed for public use.
                     </p>
-                    <h3 className="homeH3">April 2nd, 2023</h3>
-                    <p className="homeP">
-                        Users (search) page added.
-                    </p>
-                    <h3 className="homeH3">March 31st, 2023</h3>
-                    <p className="homeP">
-                        Ranks have been introduced to the game.
-                    </p>
                 </div>
             </div>
             </div>
