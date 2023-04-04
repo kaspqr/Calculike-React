@@ -40,6 +40,8 @@ export default function Login() {
                     const id = response?.data?.id;
                     setAuth({ user, pwd, accessToken, id });
                     navigate('/');
+                } else if (!checkActive?.data) {
+                    document.getElementById('loginMatch').style.display = 'block';
                 } else {
                     document.getElementById('banned').style.display = 'block';
                 }
