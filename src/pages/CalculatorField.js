@@ -111,7 +111,7 @@ function CalculatorField() {
         
         const intervalId = setInterval(async () => {
             if (counter === 0) {
-                if (level === 'all') { setCounter(180) }
+                setCounter(180)
                 clearInterval(intervalId);
                 document.querySelector('#counterDiv').style.display = 'none';
                 document.querySelector('#questionDiv').style.display = 'none';
