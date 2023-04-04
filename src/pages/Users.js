@@ -16,7 +16,8 @@ const Users = () => {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        setSearchParam(searchParam.toLowerCase())
+        const lowercaseSearch = searchParam.toLowerCase()
+        setSearchParam(lowercaseSearch)
         document.getElementById('userSearchTBody').innerHTML = ''
         document.getElementById('userSearchLength').style.display = 'none'
         document.getElementById('userSearch404').style.display = 'none'
