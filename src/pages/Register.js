@@ -29,7 +29,7 @@ export default function Register() {
 
     function handleLowercase(e) {
         e.preventDefault();
-        const lowercaseUsername = user.toLowerCase()
+        const lowercaseUsername = e.target.value.toLowerCase();
         setUsername(lowercaseUsername)
         handleRegister()
     }

@@ -25,7 +25,7 @@ export default function Login() {
 
     function handleLowercase(e) {
         e.preventDefault()
-        const lowercaseUsername = user.toLowerCase()
+        const lowercaseUsername = e.target.value.toLowerCase();
         setUser(lowercaseUsername)
         handleLogin()
     }
