@@ -23,10 +23,14 @@ export default function Login() {
         if (auth?.user) { navigate('/') }
     }, [])
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
+    function handleLowercase(e) {
+        e.preventDefault()
         const lowercaseUsername = user.toLowerCase()
         setUser(lowercaseUsername)
+        handleLogin()
+    }
+
+    const handleLogin = async () => {
         document.querySelector('#loginMatch').style.display = 'none';
         document.getElementById('banned').style.display = 'none';
 
@@ -67,7 +71,7 @@ export default function Login() {
         <div className='homeContent'>
             <div id='loginPage'>
                 <div id='loginBox'>
-                    <form id='loginForm' onSubmit={handleLogin}>
+                    <form id='loginForm' onSubmit={handleLowercase}>
                         <div id='usernameDiv'>
                             <label className='formLabel' htmlFor="user">Username:</label>
                             <input 

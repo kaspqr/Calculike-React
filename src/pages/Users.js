@@ -14,10 +14,14 @@ const Users = () => {
         return regex.test(inputValue);
     }
 
-    async function handleSubmit(e) {
+    function handleLowercase(e) {
         e.preventDefault()
         const lowercaseSearch = searchParam.toLowerCase()
         setSearchParam(lowercaseSearch)
+        handleSubmit()
+    }
+
+    async function handleSubmit() {
         document.getElementById('userSearchTBody').innerHTML = ''
         document.getElementById('userSearchLength').style.display = 'none'
         document.getElementById('userSearch404').style.display = 'none'
@@ -41,7 +45,7 @@ const Users = () => {
 
     return (
         <div className='profileContent'>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleLowercase}>
                 <div id='insideForm'>
                     <input 
                         onChange={(e) => { setSearchParam(e.target.value) }} 

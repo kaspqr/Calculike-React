@@ -27,10 +27,14 @@ export default function Register() {
         if (auth?.user) { navigate('/') }
     }, [])
 
-    const handleRegister = async (e) => {
+    function handleLowercase(e) {
         e.preventDefault();
         const lowercaseUsername = user.toLowerCase()
         setUsername(lowercaseUsername)
+        handleRegister()
+    }
+
+    const handleRegister = async () => {  
         document.querySelector('#noPwdMatch').style.display = 'none';
         document.querySelector('#unTaken').style.display = 'none';
         document.getElementById('usernameCheck').style.display = 'none'
@@ -79,7 +83,7 @@ export default function Register() {
         <div className='homeContent'>
             <div id='loginPage'>
                 <div id='loginBox'>
-                    <form id='registerForm' onSubmit={handleRegister}>
+                    <form id='registerForm' onSubmit={handleLowercase}>
                         <div id='usernameDiv'>
                             <label className='formLabel' htmlFor="user">Username:</label>
                             <input 
