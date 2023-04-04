@@ -85,7 +85,7 @@ const Profile = () => {
     }
     else if (points < 10000) { 
         rank = Practitioner 
-        rankName = "Practicioner"
+        rankName = "Practitioner"
     }
     else if (points < 50000) { 
         rank = Mathematician 
