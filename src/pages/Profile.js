@@ -32,7 +32,11 @@ const Profile = () => {
     }
 
     useEffect(() => {
+
+        if (effectRan.current === false) {
             fetchData()
+            return () => { effectRan.current = true }
+        }
     }, [])
 
     let userItems = []
