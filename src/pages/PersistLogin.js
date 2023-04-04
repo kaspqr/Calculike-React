@@ -28,13 +28,13 @@ const Persistlogin = () => {
       }, [auth?.user, refresh]);
 
     if (loading) {
-        return <><RingLoader 
+        return <div id="loadingSpinner"><RingLoader 
             color="#000"
             loading={true}
             size={150}
             aria-label="Loading Spinner"
             data-testid="loader"
-        /></>
+        /></div>
     }
 
     return (
