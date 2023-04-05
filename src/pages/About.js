@@ -38,7 +38,7 @@ const About = () => {
             <p className='aboutP'>
                 To compare yourself with the best, there is a page 
                 for hiscores, which display the top 10 players of each 
-                gamemode's each level.
+                game mode's each level.
             </p>
             <hr />
             <br />
@@ -72,7 +72,7 @@ const About = () => {
             <h3 className='aboutH3'>Understand The Game</h3>
             <br />
             <h5 className='aboutH5'>
-                You can pick between 5 different gamemodes: Add, 
+                You can pick between 5 different game modes: Add, 
                 Subtract, Multiply, Divide and Combo.
             </h5>
             <br />
@@ -93,13 +93,13 @@ const About = () => {
             </p>
             <br />
             <p className='aboutP'>
-                Combo contains questions from all of the above gamemodes, 
+                Combo contains questions from all of the above game modes, 
                 generated at random each time.
             </p>
             <br />
             <br />
             <h5 className='aboutH5'>
-                Each gamemode has 4 different levels
+                Each game mode has 4 different levels
             </h5>
             <br />
             <p className='aboutP'>
@@ -134,17 +134,17 @@ const About = () => {
             </p>
             <br />
             <p className='aboutP'>
-                Pick a gamemode and a level you wish to play. The counter starts 
+                Pick a game and a level you wish to play. The counter starts 
                 as soon as you click on the 'Start' button, so be ready!
             </p>
             <br />
             <p className='aboutP'>
                 You will then be presented with a question involving 2 randomly 
-                generated numbers. When it comes to 'Divide' gamemode, the first 
+                generated numbers. When it comes to 'Divide' game mode, the first 
                 randomly generated number is multiplied with the second number 
                 and the sum reassigned as the first number, so you would never 
                 receive a question which has an answer with a decimal point. 
-                Similar story for the 'Subtract' gamemode: the larger number of 
+                Similar story for the 'Subtract' game mode: the larger number of 
                 the two numbers will always be the first one, so your answer 
                 would never have to be negative.
             </p>
@@ -208,8 +208,8 @@ const About = () => {
             <p className='aboutP'>
                 When going to a user's profile page, right under their name is 
                 listed their rank. There are 9 ranks based on the average points you have 
-                across all 5 gamemodes' 'All' levels' points. If you have 2000 points 
-                in each gamemode's 'All' level, you have an overall average of 2000 
+                across all 5 game modes' 'All' levels' points. If you have 2000 points 
+                in each game mode's 'All' level, you have an overall average of 2000 
                 points.
             </p>
             <br />
