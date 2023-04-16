@@ -17,7 +17,6 @@ body {
 }
 
 #root {
-    height: 100vh - 100px;
     background-color: peachpuff;
 }
 
@@ -167,7 +166,7 @@ body {
     right: 15px;
     z-index: 1;
     position: fixed;
-    margin-top: 8vh;
+    margin-top: 55px;
     text-align: right;
     border: 1px solid black;
     border-radius: 3px;
@@ -178,7 +177,7 @@ body {
     left: 15px;
     z-index: 1;
     position: fixed;
-    margin-top: 8vh;
+    margin-top: 55px;
     border: 1px solid black;
     border-radius: 3px;
 }
@@ -191,7 +190,7 @@ body {
 .selectP {
     background-color: papayawhip;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    padding: 1vh;
+    padding: 7px;
     cursor: pointer;
 }
 
@@ -605,7 +604,7 @@ textarea {
 #loginSubmitButton {
     width: 100%;
     height: 32px;
-    font-size: 2vh;
+    font-size: 13px;
     background-color: black;
     color: white;
     cursor: pointer;
@@ -640,18 +639,18 @@ textarea {
 }
 
 #userSearchTable {
-    padding-top: 5vh;
+    padding-top: 25px;
 }
 
 .userSearchTr {
-    height: 5vh;
+    height: 25px;
 }
 
 .userSearchLink {
     text-decoration: none;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: black;
-    font-size: 3vh;
+    font-size: 20px;
 }
 
 #userSearch404, #userSearchLength {
