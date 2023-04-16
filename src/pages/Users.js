@@ -40,7 +40,7 @@ const Users = () => {
 
     return (
         <div className='profileContent'>
-            <form onSubmit={handleSubmit}>
+            <form id='userSearchForm' onSubmit={handleSubmit}>
                 <div id='insideForm'>
                     <input 
                         onChange={(e) => { setSearchParam(e.target.value) }} 

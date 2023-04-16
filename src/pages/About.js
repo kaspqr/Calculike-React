@@ -12,38 +12,7 @@ import Pythagoras from '../images/pythagoras.png'
 const About = () => {
     return (
         <div id='aboutPage' className='profileContent'>
-            
-            <h3 id='aboutTopH3' className='aboutH3'>Introduction</h3>
-            <br />
-            <p className='aboutP'>
-                Calculike is a free-for-all web application for users to 
-                train their skills in calculating by heart. 
-            </p>
-            <br />
-            <p className='aboutP'>
-                If you practice daily, the 
-                improvement will be significant. In order to keep good track 
-                of your progress, we have all of your hiscores listed on your 
-                profile page. You can also see other users' hiscores when 
-                visiting their profile.
-            </p>
-            <br />
-            <p className='aboutP'>
-                For extra motivation, each user also has a rank. If you 
-                play any game with a level 'All' and get a new hiscore, 
-                it will raise the points counting towards a rank, which 
-                is displayed on your profile page.
-            </p>
-            <br />
-            <p className='aboutP'>
-                To compare yourself with the best, there is a page 
-                for hiscores, which display the top 10 players of each 
-                game mode's each level.
-            </p>
-            <hr />
-            <br />
-            <br />
-            <h3 className='aboutH3'>Rules</h3>
+            <h3 id='aboutTopH3' className='aboutH3'>Rules</h3>
             <br />
             <h5 className='aboutH5'>
                 Please make sure you have read and understood everything in this section. 
@@ -139,17 +108,6 @@ const About = () => {
             </p>
             <br />
             <p className='aboutP'>
-                You will then be presented with a question involving 2 randomly 
-                generated numbers. When it comes to 'Divide' game mode, the first 
-                randomly generated number is multiplied with the second number 
-                and the sum reassigned as the first number, so you would never 
-                receive a question which has an answer with a decimal point. 
-                Similar story for the 'Subtract' game mode: the larger number of 
-                the two numbers will always be the first one, so your answer 
-                would never have to be negative.
-            </p>
-            <br />
-            <p className='aboutP'>
                 To enter your answer, simply click on the relevant digits on 
                 the calculator field. If you wish to delete the last digit you 
                 entered, simply click on the 'Del' button. If you wish to clear 
@@ -192,14 +150,6 @@ const About = () => {
                 surpassed your hiscore, but go to another page while the counter 
                 is still running, that score will not override your current hiscore, 
                 so be wary!
-            </p>
-            <br />
-            <p className='aboutP'>
-                If the counter has reached 0 and you have beaten your previous 
-                hiscore, it will instantly be updated on the 'Hiscores' page. 
-                Simultaneously, if the new hiscore was on level 'All,' your 
-                points counting towards a rank will also be updated on your 
-                profile. Read more about ranks in the next section.
             </p>
             <br />
             <br />
@@ -260,33 +210,6 @@ const About = () => {
                 '<span className='rankColor'>Pythagoras</span>' requires at least 250 000 points on average. This is the 
                 final level on the platform and is designed to be unreachable for everyone, 
                 except a select few. If you reach this level, you are in the top 0.01%. Good luck!
-            </p>
-            <hr />
-            <br />
-            <br />
-            <h3 className='aboutH3'>
-                Security
-            </h3>
-            <br />
-            <p className='aboutP'>
-                When registering your account, your password will be 
-                encrypted and stored safely in it's encrypted form at a secure 
-                database.
-            </p>
-            <br />
-            <p className='aboutP'>
-                When logging in, the password you enter will be encrypted, 
-                then compared to the encrypted password in the database, which 
-                will then send a relevant response back, either logging you in if the 
-                password was correct or displaying an error message if it was 
-                incorrect.
-            </p>
-            <br />
-            <p className='aboutP'>
-                In order to keep you logged in, the website uses secure, HTTP-only 
-                cookies, which are unavailable to hackers via scripting. Those cookies contain 
-                relevant information, such as a token to keep you signed in - and 
-                not your password.
             </p>
             <hr />
             <br />

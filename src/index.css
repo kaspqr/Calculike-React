@@ -40,7 +40,7 @@ body {
 }
 
 #aboutTopH3 {
-    padding-top: 2vh;
+    padding-top: 30px;
 }
 
 .pageContent {
@@ -48,7 +48,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding-top: 10vh;
+    padding-top: 65px;
     animation-name: wronganswer;
     animation-duration: 2s;
     animation-fill-mode: forwards;
@@ -60,11 +60,15 @@ body {
     text-align: center;
 }
 
+#userSearchForm {
+    padding-top: 30px;
+}
+
 .profileContent {
-    padding-top: 15vh;
-    padding-left: 5vh;
-    padding-right: 5vh;
-    padding-bottom: 5vh;
+    padding-top: 65px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
 }
 
 .homeContent {
@@ -100,11 +104,11 @@ body {
 }
 
 .homeH2 {
-    padding-top: 5vh;
+    padding-top: 30px;
 }
 
 .homeH3 {
-    padding-top: 2vh;
+    padding-top: 15px;
 }
 
 #layoutNavbar {
@@ -113,10 +117,8 @@ body {
     top: 0;
     width: calc(100vw - (100vw - 100%));
     background-color: rgb(250, 250, 250);
-    color: white;
-    height: 10vh;
+    height: 65px;
     border-bottom: 2px solid black;
-    align-items: center;
 }
 
 .buttonList {
@@ -125,14 +127,14 @@ body {
 
 .navButton {
     display: inline-block;
-    min-width: 50px;
     border: 0;
     height: 100%;
     color: black;
     text-align: center;
-    line-height: 10vh;
-    font-size: 2.5vh;
+    line-height: 65px;
+    font-size: 17px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    cursor: pointer;
 }
 
 .navButton a {
@@ -143,8 +145,12 @@ body {
     height: 100%;
 }
 
-.navButton:hover {
-    cursor: pointer;
+#homeIcon {
+    width: 65px;
+}
+
+#menuBars {
+    width: 65px;
 }
 
 #settingsButton {
@@ -160,7 +166,7 @@ body {
     display: flex;
     right: 15px;
     z-index: 1;
-    position: absolute;
+    position: fixed;
     margin-top: 8vh;
     text-align: right;
     border: 1px solid black;
@@ -171,7 +177,7 @@ body {
     display: flex;
     left: 15px;
     z-index: 1;
-    position: absolute;
+    position: fixed;
     margin-top: 8vh;
     border: 1px solid black;
     border-radius: 3px;
@@ -213,7 +219,6 @@ body {
 }
 
 #homePage {
-    height: 100vh - 100px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -327,13 +332,13 @@ body {
 }
 
 .hsSelect {
-    height: 4vh;
+    height: 30px;
     width: 40%;
     margin-left: 2px;
     margin-right: 2px;
     border-radius: 5px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 3vh;
+    font-size: 18px;
     border: 2px solid black;
 }
 
@@ -342,20 +347,17 @@ body {
 }
 
 #searchButton {
-    height: 4vh;
-    width: 4vh;
+    height: 30px;
+    width: 30px;
     margin-left: 2px;
     margin-right: 2px;
     background-color: papayawhip;
     border-radius: 5px;
-}
-
-#searchButton:hover {
     cursor: pointer;
 }
 
 #userSearchInput {
-    height: 4vh;
+    height: 30px;
     padding-left: 5px;
     border-radius: 5px;
 }
@@ -368,6 +370,7 @@ body {
 
 #hiscoreContent {
     margin: auto;
+    padding-top: 30px;
 }
 
 #hiscoreTable {
@@ -379,22 +382,22 @@ body {
 
 .hiscoreTr1 {
     border-top: 2px solid black;
-    height: 5vh;
-    font-size: 2vh;
+    height: 35px;
+    font-size: 13px;
     background-color: white;
 }
 
 .hiscoreTr2 {
     border-top: 2px solid black;
-    height: 5vh;
-    font-size: 2vh;
+    height: 35px;
+    font-size: 13px;
     background-color: papayawhip;
 }
 
 .hiscoreTh {
-    height: 5vh;
+    height: 35px;
     text-align: left;
-    font-size: 2.2vh;
+    font-size: 14px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -442,9 +445,9 @@ body {
 
 #profileBioDiv, #profileRankDiv, #profilePointsDiv {
     width: 100%;
-    padding-top: 2vh;
+    padding-top: 20px;
     text-align: center;
-    font-size: 2vh;
+    font-size: 13px;
     margin: auto;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -470,15 +473,15 @@ body {
 
 #hiscoreScoreTh {
     text-align: right;
-    font-size: 2.2vh;
+    font-size: 14px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 #loginPage {
     display: flex;
     justify-content: center;
-    margin-top: 10vh;
-    height: 80vh;
+    margin-top: 65px;
+    height: calc(100vh - 125px);
 }
 
 #loginBox {
@@ -498,15 +501,11 @@ body {
 }
 
 .aboutH3 {
-    font-size: 3.5vh;
+    font-size: 21px;
 }
 
-.aboutH5 {
-    font-size: 2.5vh;
-}
-
-.aboutP {
-    font-size: 2.5vh;
+.aboutH5, .aboutP {
+    font-size: 16px;
 }
 
 .rankColor {
@@ -565,14 +564,15 @@ textarea {
 }
 
 .formLabel {
-    font-size: 2vh;
+    font-size: 13px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 #usernameInput {
     width: 100%;
-    height: 7vh;
+    height: 45px;
     padding-left: 7px;
+    border-radius: 3px;
 }
 
 .fieldInput {
@@ -596,14 +596,15 @@ textarea {
 
 .passwordInput {
     width: 100%;
-    height: 7vh;
+    height: 45px;
+    border-radius: 3px;
     padding-left: 7px;
     margin-bottom: 7px;
 }
 
 #loginSubmitButton {
     width: 100%;
-    height: 4vh;
+    height: 32px;
     font-size: 2vh;
     background-color: black;
     color: white;
@@ -615,21 +616,21 @@ textarea {
 
 .updateSettingsButton {
     width: 100%;
-    height: 4vh;
-    font-size: 2vh;
+    height: 32px;
+    font-size: 13px;
     background-color: black;
     color: white;
     border-radius: 5px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin-bottom: 7px;
-    margin-top: 1vh;
+    margin-top: 10px;
     cursor: pointer;
 }
 
 #registerLink {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-align: center;
-    font-size: 2vh;
+    font-size: 13px;
 }
 
 .errMsg {
@@ -667,7 +668,7 @@ textarea {
 @media (min-width: 500px) {
 
     #profileTable, #profileBioDiv, #hiscoreTable, #hiscoreContent, #loginBox {
-        width: calc(500px - 10vh);
+        width: calc(500px - 10vw);
     }
 }
 

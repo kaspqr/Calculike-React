@@ -98,10 +98,10 @@ function Layout() {
                 <ul className="buttonList">
                     { showMenu 
                     ? <li id="menuBars" onClick={handleMenu} className="navButton"><FontAwesomeIcon icon={faBars}/></li>
-                    : <><li className="navButton"><Link to="/"><FontAwesomeIcon icon={faHome} /></Link></li>
+                    : <><li id="homeIcon" className="navButton"><Link to="/"><FontAwesomeIcon icon={faHome} /></Link></li>
                         <li id="hiscoreButton" className="navButton"><Link to="/hiscores">Hiscores</Link></li>
-                        <li id="trainButton" className="navButton"><Link to="/train">Train</Link></li>
-                        <li id="rulesButton" className="navButton"><Link to="/about">About</Link></li>
+                        <li id="trainButton" className="navButton"><Link to="/train">Play</Link></li>
+                        <li id="rulesButton" className="navButton"><Link to="/about">Rules</Link></li>
                         <li id="usersButton" className="navButton"><Link to="/users">Users</Link></li></>
                     }
                     
@@ -118,9 +118,9 @@ function Layout() {
                 <hr />
             <Link to="/hiscores"><p className="selectP">Hiscores</p></Link>
                 <hr />
-            <Link to="/train"><p className="selectP">Train</p></Link>
+            <Link to="/train"><p className="selectP">Play</p></Link>
                 <hr />
-            <Link to="/about"><p className="selectP">About</p></Link>
+            <Link to="/about"><p className="selectP">Rules</p></Link>
                 <hr />
             <Link to="/users"><p className="selectP">Users</p></Link>
             </div>
@@ -134,9 +134,9 @@ function Layout() {
                     { showMenu 
                         ? <li id="menuBars" onClick={handleMenu} className="navButton"><FontAwesomeIcon icon={faBars}/></li>
                         : <>
-                        <li className="navButton"><Link to="/"><FontAwesomeIcon icon={faHome} /></Link></li>
+                        <li id="homeIcon" className="navButton"><Link to="/"><FontAwesomeIcon icon={faHome} /></Link></li>
                         <li id="hiscoreButton" className="navButton"><Link to="/hiscores">Hiscores</Link></li>
-                        <li id="rulesButton" className="navButton"><Link to="/about">About</Link></li>
+                        <li id="rulesButton" className="navButton"><Link to="/about">Rules</Link></li>
                         <li id="usersButton" className="navButton"><Link to="/users">Users</Link></li></> 
                     }
                     <li id="loginButton" className="navButton"><Link to="/login">Login</Link></li>
@@ -148,7 +148,7 @@ function Layout() {
                 <hr />
             <Link to="/hiscores"><p className="selectP">Hiscores</p></Link>
                 <hr />
-            <Link to="/about"><p className="selectP">About</p></Link>
+            <Link to="/about"><p className="selectP">Rules</p></Link>
                 <hr />
             <Link to="/users"><p className="selectP">Users</p></Link>
             </div>
