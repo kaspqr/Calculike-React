@@ -426,12 +426,12 @@ body {
 }
 
 .profileTr1 {
-    height: 5vh;
+    height: 35px;
     background-color: papayawhip;
 }
 
 .profileTr2 {
-    height: 5vh;
+    height: 35px;
     background-color: white;
 }
 
@@ -576,7 +576,7 @@ textarea {
 
 .textfieldInput {
     width: 100%;
-    height: 14vh;
+    height: 100px;
     padding: 7px;
     resize: none;
 }
