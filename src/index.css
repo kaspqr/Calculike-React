@@ -33,6 +33,7 @@ body {
 }
 
 #profileUsername, #aboutHeader {
+    padding-top: 30px;
     font-size: 25px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-align: center;
@@ -158,7 +159,7 @@ body {
 }
 
 #settingsPassword {
-    margin-top: 17vh;
+    padding-top: 100px;
 }
 
 #settingsSelect {
@@ -488,7 +489,7 @@ body {
     align-items: center;
     border-radius: 5px;
     border: 2px solid black;
-    
+    align-items: center;
 }
 
 .aboutH3, .aboutH5, .aboutP {
@@ -521,11 +522,6 @@ textarea {
     border: 2px solid black;
 }
 
-#loginForm {
-    width: 80%;
-    margin-top: 30%;
-}
-
 .changeSettings {
     width: 80%;
     margin-top: 3%;
@@ -549,9 +545,11 @@ textarea {
     width: 80%;
 }
 
-#registerForm {
+#registerForm, #loginForm {
     width: 80%;
-    margin-top: 20%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
 }
 
 #usernameDiv {
@@ -710,5 +708,16 @@ textarea {
     .profileContent {
         margin: auto;
         width: 680px;
+    }
+}
+
+@media (max-height: 625px) {
+    #loginPage {
+        height: 500px;
+        margin-top: 95px;
+    }
+
+    .homeContent {
+        height: auto;
     }
 }

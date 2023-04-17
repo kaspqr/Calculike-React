@@ -95,7 +95,7 @@ const About = () => {
             <h5 className='aboutH5'>How to Play</h5>
             <br />
             <p className='aboutP'>
-                Once you are registered and logged in, you can choose 'Train' 
+                Once you are registered and logged in, you can choose 'Play' 
                 from the navigation bar at the top of your screen. If you are 
                 playing on a mobile or any other devide with a viewport that's 
                 narrower than 768 pixels, you can find it under the drop down 

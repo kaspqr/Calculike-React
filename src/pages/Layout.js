@@ -64,11 +64,13 @@ function Layout() {
 
     useEffect(() => {
         function handleResize() {
-        if (window.innerWidth <= 768) { // Change 768 to your desired breakpoint
-            setShowMenu(true);
-        } else {
-            setShowMenu(false);
-        }
+            if (window.innerWidth <= 768) { 
+                setShowMenu(true);
+            } else {
+                setShowMenu(false);
+                document.querySelector('.menuSelect').style.display = 'none'
+                setMenuHidden(true)
+            }
         }
 
         handleResize();
