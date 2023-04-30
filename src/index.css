@@ -5,6 +5,10 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+body, #root, #app {
+    -webkit-tap-highlight-color: transparent;
+}
+
 body {
     background-color: peachpuff;
 }
