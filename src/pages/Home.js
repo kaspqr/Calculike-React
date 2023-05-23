@@ -7,6 +7,10 @@ function Home() {
                 
                 <div id="newsfeed">
                     <h2 className="homeH2">Newsfeed</h2>
+                    <h3 className="homeH3">May 23rd, 2023</h3>
+                    <p className="homeP">
+                        Styling changed.
+                    </p>
                     <h3 className="homeH3">April 17th, 2023</h3>
                     <p className="homeP">
                         Bugs fixed, styling changed.
