@@ -1,9 +1,9 @@
 function NoPage() {
     return (
-        <div style={{textAlign: "center"}} className="profileContent">
+        <div style={{textAlign: "center"}} className="profile-content">
             Error 404: Page not found.
         </div>
-    );
+    )
 }
 
-export default NoPage;
+export default NoPage

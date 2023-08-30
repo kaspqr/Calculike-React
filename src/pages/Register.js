@@ -25,15 +25,15 @@ export default function Register() {
 
     useEffect(() => {
         if (auth?.user) { navigate('/') }
-    }, [])
+    }, [auth?.user, navigate])
 
     const handleRegister = async (e) => {  
         e.preventDefault()
         const lowercaseUsername = user.toLowerCase()
-        document.querySelector('#noPwdMatch').style.display = 'none';
-        document.querySelector('#unTaken').style.display = 'none';
-        document.getElementById('usernameCheck').style.display = 'none'
-        document.getElementById('passwordCheck').style.display = 'none'
+        document.querySelector('#no-pwd-match').style.display = 'none';
+        document.querySelector('#username-taken').style.display = 'none';
+        document.getElementById('username-check').style.display = 'none'
+        document.getElementById('password-check').style.display = 'none'
 
         const isValidUsername = validateInput(lowercaseUsername, usernameRegex)
         const isValidPassword = validateInput(pwd, passwordRegex)
@@ -55,7 +55,7 @@ export default function Register() {
                     console.error('No server response')
                 } else if (err.response?.status === 409) {
                     console.error('Username taken')
-                    document.querySelector('#unTaken').style.display = 'block';
+                    document.querySelector('#username-taken').style.display = 'block';
                 } else {
                     console.error('Registration failed')
                 }
@@ -63,26 +63,31 @@ export default function Register() {
         }
         else { 
             if (pwd !== passwordCheck) {
-                document.querySelector('#noPwdMatch').style.display = 'block';
+                document.querySelector('#no-pwd-match').style.display = 'block';
             }
             if (!isValidUsername) {
-                document.getElementById('usernameCheck').style.display = 'block'
+                document.getElementById('username-check').style.display = 'block'
             }
             else if (!isValidPassword) {
-                document.getElementById('passwordCheck').style.display = 'block'
+                document.getElementById('password-check').style.display = 'block'
             }
         }
     }
 
     return (
-        <div className='homeContent'>
-            <div id='loginPage'>
-                <div id='loginBox'>
-                    <form id='registerForm' onSubmit={handleRegister}>
-                        <div id='usernameDiv'>
-                            <label className='formLabel' htmlFor="user">Username:</label>
+        <div className='home-content'>
+            <div id='login-page'>
+                <div id='login-box'>
+                    <form id='register-form' onSubmit={handleRegister}>
+
+                        <div id='username-div'>
+
+                            <label className='form-label' htmlFor="user">
+                                Username:
+                            </label>
+
                             <input 
-                                id='usernameInput'
+                                id='username-input'
                                 required 
                                 autoFocus
                                 autoComplete='off'
@@ -91,23 +96,35 @@ export default function Register() {
                                 value={user}
                                 onChange={(e) => setUsername(e.target.value)}
                             />
+
                         </div>
+
                         <div id='passwordDiv'>
-                            <label className='formLabel' htmlFor="password">Password:</label>
+
+                            <label className='form-label' htmlFor="password">
+                                Password:
+                            </label>
+
                             <input 
-                                className='passwordInput'
-                                id='passwordInput'
+                                className='password-input'
+                                id='password-input'
                                 required 
                                 type="password" 
                                 name='password' 
                                 value={pwd}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
+
                         </div>
+
                         <div id='passwordConfirmDiv'>
-                            <label className='formLabel' htmlFor="passwordConfirm">Confirm Password:</label>
+
+                            <label className='form-label' htmlFor="passwordConfirm">
+                                Confirm Password:
+                            </label>
+
                             <input 
-                                className='passwordInput'
+                                className='password-input'
                                 id='passwordConfirmInput'
                                 required 
                                 type="password" 
@@ -115,24 +132,34 @@ export default function Register() {
                                 value={passwordCheck}
                                 onChange={(e) => setPasswordCheck(e.target.value)}
                             />
+
                         </div>
-                        <button id='loginSubmitButton' type='submit'>Register</button>
-                        <div id='registerLink'>
+
+                        <button id='login-submit-button' type='submit'>
+                            Register
+                        </button>
+
+                        <div id='register-link'>
                             Already have an account? <Link to="/login">Login</Link>
                         </div>
-                        <div className='errMsg' id='unTaken' style={{display: "none"}}>
+
+                        <div className='err-msg' id='username-taken' style={{display: "none"}}>
                             Username taken, please choose another one
                         </div>
-                        <div className='errMsg' id='noPwdMatch' style={{display: "none"}}>
+
+                        <div className='err-msg' id='no-pwd-match' style={{display: "none"}}>
                             Passwords do not match
                         </div>
-                        <div className='errMsg' id='usernameCheck' style={{display: "none"}}>
+
+                        <div className='err-msg' id='username-check' style={{display: "none"}}>
                             Username must be 4-12 characters long and may only contain numbers and lowercase characters of the English alphabet
                         </div>
-                        <div className='errMsg' id='passwordCheck' style={{display: "none"}}>
+
+                        <div className='err-msg' id='password-check' style={{display: "none"}}>
                             Password must be 6-20 characters long and may only contain numbers, letters of the English alphabet and the following symbols:<br />
                             {regex}
                         </div>
+                        
                     </form>
                 </div>
             </div>

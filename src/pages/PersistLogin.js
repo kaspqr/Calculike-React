@@ -28,7 +28,7 @@ const Persistlogin = () => {
       }, [auth?.user, refresh]);
 
     if (loading) {
-        return <div id="loadingSpinner"><RingLoader 
+        return <div id="loading-spinner"><RingLoader 
             color="#000"
             loading={true}
             size={150}

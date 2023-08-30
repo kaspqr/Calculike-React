@@ -53,8 +53,11 @@ const Profile = () => {
             user[item][0].startsWith('divide') || 
             user[item][0].startsWith('combo')) && 
             user[item][1] > 0) {
+
             let level
+
             const temp = user[item][0]
+
             if (user[item][0].endsWith('all')) {
                 points += user[item][1]
                 let index = temp.indexOf('all')
@@ -62,11 +65,17 @@ const Profile = () => {
             } else {
                 level = temp.slice(0, temp.length - 1) + " lvl " + temp[temp.length - 1]
             }
+
             level = level[0].toUpperCase() + level.slice(1)
-            userItems.push(<tr className={light % 2 === 0 ? 'profileTr1' : 'profileTr2'} key={item}>
-                <td className='profileKeyTd'>{level}</td>
-                <td className='profileValueTd'>{user[item][1]}</td></tr>)
+
+            userItems.push(
+                <tr className={light % 2 === 0 ? 'profile-tr-1' : 'profile-tr-2'} key={item}>
+                <td className='profile-key-td'>{level}</td>
+                <td className='profile-value-td'>{user[item][1]}</td></tr>
+            )
+
             light++
+
         } else if (user[item][0] === 'user') {
             username = user[item][1]
         }
@@ -74,7 +83,9 @@ const Profile = () => {
 
     let rank = Novice
     let rankName = "Novice"
+
     points = points / 5
+
     if (points < 100) { 
         rank = Novice 
         rankName = "Novice"
@@ -114,26 +125,54 @@ const Profile = () => {
 
     if (!isResponse) {
         return (
-            <div className='profileContent'>
-                <div style={{textAlign: "center"}}>Error 404: User not found</div>
+            <div className='profile-content'>
+                <div style={{textAlign: "center"}}>
+                    Error 404: User not found
+                </div>
             </div>
         )
     }
+
     return (
-        <div className='profileContent'>
-            <header id='profileUsername'>
-                {username}
+        <div className='profile-content'>
+
+            <header id='profile-username'>
+                <b>{username}</b>
             </header>
-            <div id='profileRankDiv'><img className='badgePNG' src={rank} alt="novicebadge" /></div>
-            <div id='profilePointsDiv'>{Math.floor(points)} points - {rankName}</div>
-            <div id='profileBioDiv'>{bio}</div>
-            { points > 0 ? <div className='profileScoresTitle'>Scores</div> : <></> }
-            <table id='profileTable'>
-                <tbody id='hiscoreBody'>
-                {userItems}
+
+            <br />
+
+            <div id='profile-rank-div'>
+                <img className='badge-png' src={rank} alt="novicebadge" />
+            </div>
+
+            <br />
+
+            <p className='rank-name'>
+                {rankName}
+            </p>
+
+            <p id='profile-points-div'>
+                {Math.floor(points)} points
+            </p>
+
+            <br />
+
+            <p id='profile-bio-div'>
+                <i>{bio}</i>
+            </p>
+
+            {points > 0 
+                ? <><br /><div className='profile-scores-title'>Scores</div></>
+                : null
+            }
+
+            <table id='profile-table'>
+                <tbody>
+                    {userItems}
                 </tbody>
             </table>
-            <p></p>
+
         </div>
     )
 }

@@ -18,50 +18,63 @@ const Users = () => {
         e.preventDefault()
         const lowercaseSearch = searchParam.toLowerCase()
         document.getElementById('userSearchTBody').innerHTML = ''
-        document.getElementById('userSearchLength').style.display = 'none'
-        document.getElementById('userSearch404').style.display = 'none'
+        document.getElementById('user-search-length').style.display = 'none'
+        document.getElementById('user-search-404').style.display = 'none'
         if (searchParam.length < 4) {
-            document.getElementById('userSearchLength').style.display = 'block'
+            document.getElementById('user-search-length').style.display = 'block'
         } else if (!validateInput(lowercaseSearch, usernameRegex)) {
-            document.getElementById('userSearchLength').style.display = 'block'
+            document.getElementById('user-search-length').style.display = 'block'
         } else {
             const response = await axiosPrivate.get(USERS_URL) 
             const filteredResponse = response.data.filter(user => user.user.includes(lowercaseSearch))
             const activeFiltered = filteredResponse.filter(user => user.active === true)
             if (!activeFiltered.length) {
-                document.getElementById('userSearch404').style.display = 'block'
+                document.getElementById('user-search-404').style.display = 'block'
             } else {
                 activeFiltered.map(user => {
-                    document.getElementById('userSearchTBody').innerHTML += `<tr class="userSearchTr"><td><a class="userSearchLink" href="/profiles/${user.user}">${user.user}</a></td></tr>`
+                    return document.getElementById('userSearchTBody').innerHTML += 
+                    `<tr class="user-search-tr"><td><a class="user-search-link" 
+                    href="/profiles/${user.user}">${user.user}</a></td></tr>`
                 })
             }
         }
     }
 
     return (
-        <div className='profileContent'>
-            <form id='userSearchForm' onSubmit={handleSubmit}>
-                <div id='insideForm'>
+        <div className='profile-content'>
+            <form id='user-search-form' onSubmit={handleSubmit}>
+
+                <div id='inside-form'>
+
                     <input 
                         onChange={(e) => { setSearchParam(e.target.value) }} 
                         value={searchParam} 
-                        id='userSearchInput' 
+                        id='user-search-input' 
                         type="text" 
                         placeholder='Search username' 
                     />
-                    <button id='searchButton' type='submit'><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+
+                    <button id='search-button' type='submit'>
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    </button>
+
                 </div>
-                <div style={{ display: 'none' }} id='userSearchLength' className='errMsg'>
+
+                <div style={{ display: 'none' }} id='user-search-length' className='err-msg'>
                     Length of the searched username must be at least 4 characters long and only contain 
                     numbers and/or letters of the English alphabet.
                 </div>
-                <div style={{ display: 'none' }} id='userSearch404' className='errMsg'>
+
+                <div style={{ display: 'none' }} id='user-search-404' className='err-msg'>
                     The user you searched for does not exist.
                 </div>
+
             </form>
-            <table id='userSearchTable'>
+
+            <table id='user-search-table'>
                 <tbody id='userSearchTBody'></tbody>
             </table>
+
         </div>
     )
 }

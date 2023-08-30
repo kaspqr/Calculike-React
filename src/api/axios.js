@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from "axios"
 
-const BASE_URL = 'https://calculike-api.onrender.com';
+const BASE_URL = 'https://calculike-api.onrender.com'
 
 export default axios.create({
     baseURL: BASE_URL

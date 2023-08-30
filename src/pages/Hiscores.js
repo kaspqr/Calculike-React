@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { axiosPrivate } from '../api/axios';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMedal, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useRef, useState } from 'react'
+import { axiosPrivate } from '../api/axios'
+import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMedal, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 function Hiscores() {
     const effectRan = useRef(false)
@@ -29,61 +29,93 @@ function Hiscores() {
 
     function handleHiscoreSearch(e) {
         e.preventDefault()
-        const calcSelect = document.getElementById('calcSelect').value
-        const levelSelect = document.getElementById('levelSelect').value
+        const calcSelect = document.getElementById('calc-select').value
+        const levelSelect = document.getElementById('level-select').value
         searchRef.current = (calcSelect + levelSelect)
         fetchData()
     }
 
     return (
-        <div className='profileContent'>
-            <div id='hiscoreContent'>
+        <div className='profile-content'>
+            <div id='hiscore-content'>
                 <div id='searchDiv'>
                     <form onSubmit={handleHiscoreSearch}>
-                        <div id='insideForm'>
-                            <select id="calcSelect" className="hsSelect">
+                        <div id='inside-form'>
+
+                            <label className='off-screen' htmlFor="calc-select">
+                                Select Type of Calculation
+                            </label>
+
+                            <select name='calc-select' id="calc-select" className="hs-select">
                                 <option className="calcOption" value="combo">Combo</option>
                                 <option className="calcOption" value="add">Add</option>
                                 <option className="calcOption" value="subtract">Subtract</option>
                                 <option className="calcOption" value="multiply">Multiply</option>
                                 <option className="calcOption" value="divide">Divide</option>
                             </select>
-                            <select id="levelSelect" className="hsSelect">
+
+                            <label className='off-screen' htmlFor="level-select">
+                                Select Level
+                            </label>
+
+                            <select name='level-select' id="level-select" className="hs-select">
                                 <option className="calcOption" value="all">All</option>
                                 <option className="calcOption" value="3">Lvl 3</option>
                                 <option className="calcOption" value="2">Lvl 2</option>
                                 <option className="calcOption" value="1">Lvl 1</option>
                             </select>
-                            <button type="submit" id="searchButton"><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+
+                            <button type="submit" id="search-button">
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            </button>
+
                         </div>
                     </form>
                 </div>
-                <div id='tableDiv'>
-                    <table id='hiscoreTable'>
-                        <tbody id='hiscoreBody'>
+
+                <div>
+                    <table id='hiscore-table'>
+                        <tbody>
                             <tr>
-                                <th className='hiscoreTh'>Rank</th>
-                                <th className='hiscoreTh'>User</th>
-                                <th id='hiscoreScoreTh'>Hiscore</th>
+                                <th className='hiscore-th'>
+                                    Rank
+                                </th>
+
+                                <th className='hiscore-th'>
+                                    User
+                                </th>
+
+                                <th id='hiscore-score-th'>
+                                    Hiscore
+                                </th>
+
                             </tr>
                             {hiscoreUsers.map((user, i) => 
                                 <tr 
                                     key={user._id} 
                                     className={i % 2 === 0 
-                                    ? 'hiscoreTr2' 
-                                    : 'hiscoreTr1'
-                                }>
-                                    <td className='hiscoreRankTd'>{i + 1 === 1 
-                                        ? <FontAwesomeIcon color='gold' icon={faMedal} /> 
-                                        : i + 1 === 2 
-                                        ? <FontAwesomeIcon color='silver' icon={faMedal} /> 
-                                        : i + 1 === 3 
-                                        ? <FontAwesomeIcon color='rgb(205, 127, 50)' icon={faMedal} /> 
-                                        : `#${i+1}`}</td>
-                                    <td className='hiscoreTd'><Link to={{
-                                        pathname: `/profiles/${user.user}`,
-                                    }}>{user.user}</Link></td>
-                                    <td className='hiscoreScoreTd'>{user[searchRef.current]}</td>
+                                        ? 'hiscore-tr-2' 
+                                        : 'hiscore-tr-1'
+                                    }
+                                >
+                                    <td className='hiscore-rank-td'>{i <= 2 
+                                        ? <FontAwesomeIcon 
+                                            color={i === 0 ? 'gold' : i === 1 ? 'silver' : 'rgb(205, 127, 50)'} 
+                                            icon={faMedal} 
+                                        /> 
+                                        : `#${i+1}`
+                                        }
+                                    </td>
+
+                                    <td className='hiscore-td'>
+                                        <Link to={`/profiles/${user.user}`}>
+                                            {user.user}
+                                        </Link>
+                                    </td>
+
+                                    <td className='hiscore-score-td'>
+                                        {user[searchRef.current]}
+                                    </td>
                                 </tr>
                             )}
                         </tbody>
@@ -94,4 +126,4 @@ function Hiscores() {
     )
 }
 
-export default Hiscores;
+export default Hiscores

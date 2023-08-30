@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from "react-router-dom";
-import { axiosPrivate } from '../api/axios';
-import { useState, useEffect, useRef } from 'react';
-import useAuth from "../hooks/useAuth";
+import { Link } from "react-router-dom"
+import { axiosPrivate } from '../api/axios'
+import { useState, useEffect, useRef } from 'react'
+import useAuth from "../hooks/useAuth"
 
 const ChangePwd = () => {
 
@@ -17,7 +17,7 @@ const ChangePwd = () => {
     const regex = "!@#$%^&*()_+={};:<>?~.-"
 
     function validateInput(inputValue, regex) {
-        return regex.test(inputValue);
+        return regex.test(inputValue)
     }
 
     async function fetchData() {
@@ -35,15 +35,15 @@ const ChangePwd = () => {
 
     async function handleChangePwd(e) {
         e.preventDefault()
-        document.getElementById('oldPwdCheck').style.display = 'none'
-        document.getElementById('newPwdMatch').style.display = 'none'
-        document.getElementById('newPwdLengthErr').style.display = 'none'
-        document.getElementById('pwdChanged').style.display = 'none'
+        document.getElementById('old-pwd-check').style.display = 'none'
+        document.getElementById('new-pwd-match').style.display = 'none'
+        document.getElementById('new-pwd-length-err').style.display = 'none'
+        document.getElementById('pwd-changed').style.display = 'none'
         const isValidPwd = validateInput(newPwd, passwordRegex)
         const isOldPwdValid = validateInput(password, passwordRegex)
-        if (!isOldPwdValid) { document.getElementById('oldPwdCheck').style.display = 'block' }
-        if (newPwd !== newPwdConfirm) { document.getElementById('newPwdMatch').style.display = 'block' }
-        if (!isValidPwd) { document.getElementById('newPwdLengthErr').style.display = 'block' }
+        if (!isOldPwdValid) { document.getElementById('old-pwd-check').style.display = 'block' }
+        if (newPwd !== newPwdConfirm) { document.getElementById('new-pwd-match').style.display = 'block' }
+        if (!isValidPwd) { document.getElementById('new-pwd-length-err').style.display = 'block' }
         if (newPwd.length >= 6 && newPwd === newPwdConfirm && isValidPwd && isOldPwdValid) {
             try {
                 const accessToken = auth?.accessToken
@@ -52,7 +52,7 @@ const ChangePwd = () => {
                 const user = response.data.user
                 const pwd = response.data.pwd
                 setAuth({ user, pwd, accessToken, id })
-                document.getElementById('pwdChanged').style.display = 'block'
+                document.getElementById('pwd-changed').style.display = 'block'
                 setPassword('')
                 setNewPwd('')
                 setNewPwdConfirm('')
@@ -61,7 +61,7 @@ const ChangePwd = () => {
                     console.error('No Server Response');
                 } else if (error.response?.status === 401) {
                     console.error('Current password is incorrect')
-                    document.getElementById('oldPwdCheck').style.display = 'block'
+                    document.getElementById('old-pwd-check').style.display = 'block'
                 }
             }
         }
@@ -69,66 +69,89 @@ const ChangePwd = () => {
 
 
     return (
-        <div className='homeContent'>
-            <div id='loginPage'>
-                <div id='loginBox'>
-                    <form onSubmit={handleChangePwd} id='changePassword'>
-                        <div id='oldPasswordDiv'>
-                            <label className='formLabel' htmlFor="oldPassword">Current Password:</label>
+        <div className='home-content'>
+            <div id='login-page'>
+                <div id='login-box'>
+                    <form onSubmit={handleChangePwd} id='change-password'>
+                        <div>
+
+                            <label className='form-label' htmlFor="old-password">
+                                Current Password:
+                            </label>
+
                             <input 
-                                id='oldPasswordInput'
-                                className='passwordInput'
+                                className='password-input'
                                 autoComplete='off'
                                 autoFocus
                                 required 
                                 type="password" 
-                                name='oldPassword' 
+                                name='old-password' 
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
+
                         </div>
-                        <div id='newPasswordDiv'>
-                            <label className='formLabel' htmlFor="newPassword">New Password:</label>
+
+                        <div>
+
+                            <label className='form-label' htmlFor="new-password">
+                                New Password:
+                            </label>
+
                             <input 
-                                className='passwordInput'
-                                id='newPasswordInput'
+                                className='password-input'
                                 required 
                                 type="password" 
-                                name='newPassword'  
+                                name='new-password'  
                                 value={newPwd}
                                 onChange={(e) => setNewPwd(e.target.value)}
                             />
+
                         </div>
-                        <div id='newPasswordConfirmDiv'>
-                            <label className='formLabel' htmlFor="newPasswordConfirm">Confirm New Password:</label>
+
+                        <div>
+
+                            <label className='form-label' htmlFor="new-password-confirm">
+                                Confirm New Password:
+                            </label>
+
                             <input 
-                                className='passwordInput'
-                                id='newPasswordConfirmInput'
+                                className='password-input'
                                 required 
                                 type="password" 
-                                name='newPasswordConfirm'  
+                                name='new-password-confirm'  
                                 value={newPwdConfirm}
                                 onChange={(e) => setNewPwdConfirm(e.target.value)}
                             />
+
                         </div>
-                        <button id='loginSubmitButton' type='submit'>Change Password</button>
-                        <div id='registerLink'>
+
+                        <button title='Change Password' id='login-submit-button' type='submit'>
+                            Change Password
+                        </button>
+
+                        <div id='register-link'>
                             Changed your mind? <Link to="/settings">Go back</Link>
                         </div>
-                        <div className='errMsg' style={{display: "none"}} id='newPwdMatch'>
+
+                        <div className='err-msg' style={{display: "none"}} id='new-pwd-match'>
                             New passwords do not match
                         </div>
-                        <div className='errMsg' style={{display: "none"}} id='oldPwdCheck'>
+
+                        <div className='err-msg' style={{display: "none"}} id='old-pwd-check'>
                             The current password you entered was incorrect
                         </div>
-                        <div className='errMsg' style={{display: "none"}} id='newPwdLengthErr'>
+
+                        <div className='err-msg' style={{display: "none"}} id='new-pwd-length-err'>
                             Password must be 6-20 characters long and may only contain letters, numbers and the following digits:
                             <br />
                             {regex}
                         </div>
-                        <div className='successMsg' style={{display: "none"}} id='pwdChanged'>
+
+                        <div className='success-msg' style={{display: "none"}} id='pwd-changed'>
                             Your password was changed successfully
                         </div>
+
                     </form>
                 </div>
             </div>

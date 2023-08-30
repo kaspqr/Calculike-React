@@ -34,51 +34,71 @@ const Settings = () => {
 
     async function handleBioChange(e) {
         e.preventDefault()
-        document.getElementById('emptyBio').style.display = 'none'
-        document.getElementById('bioChanged').style.display = 'none'
+        document.getElementById('empty-bio').style.display = 'none'
+        document.getElementById('bio-changed').style.display = 'none'
         if (!bio.length) {
-            document.getElementById('emptyBio').style.display = 'block'
+            document.getElementById('empty-bio').style.display = 'block'
         } else {
             const response = await axiosPrivate.put(USERS_URL, { "id": auth.id, "bio": bio })
             if (response.data) {
-                document.getElementById('bioChanged').style.display = 'block'
+                document.getElementById('bio-changed').style.display = 'block'
             }
         }
     }
 
 
     return (
-        <div className='homeContent'>
-            <div id='loginPage'>
-                <div id='loginBox'>
-                    <form onSubmit={handlePasswordChange} className='changeSettings' id='settingsPassword'>
-                        <div id='changePasswordDiv'>
-                            <label className='formLabel' htmlFor="changepassword">Password: (encrypted)</label>
-                            <button className='updateSettingsButton' type='submit'>Change Password</button>
+        <div className='home-content'>
+            <div id='login-page'>
+                <div id='login-box'>
+                    <form onSubmit={handlePasswordChange} className='change-settings' id='settings-password'>
+
+                        <div>
+                            <label className='form-label' htmlFor="change-password">
+                                Password:
+                            </label>
+
+                            <button className='update-settings-button' type='submit'>
+                                Change Password
+                            </button>
+
                         </div>
+
                     </form>
-                    <form onSubmit={handleBioChange} className='changeSettings' id='changeBio'>
-                        <div id='bioDiv'>
-                            <label className='formLabel' htmlFor="bio">Bio:</label>
+
+                    <form onSubmit={handleBioChange} className='change-settings'>
+                        <div>
+
+                            <label className='form-label' htmlFor="bio">
+                                Bio:
+                            </label>
+
                             <textarea 
                                 id='bio'
                                 maxLength="150"
                                 minLength="1"
-                                className='textfieldInput'
+                                className='textfield-input'
                                 autoComplete='off'
                                 type="text" 
                                 name='bio' 
                                 value={bio}
                                 onChange={(e) => setBio(e.target.value)}
                             />
+
                         </div>
-                        <button className='updateSettingsButton' type='submit'>Update Bio</button>
-                        <div id='emptyBio' style={{ display: "none" }} className='errMsg'>
+
+                        <button className='update-settings-button' type='submit'>
+                            Update Bio
+                        </button>
+
+                        <div id='empty-bio' style={{ display: "none" }} className='err-msg'>
                             Bio cannot be empty.
                         </div>
-                        <div id='bioChanged' style={{ display: "none" }} className='successMsg'>
+
+                        <div id='bio-changed' style={{ display: "none" }} className='success-msg'>
                             Your bio has been changed successfully.
                         </div>
+
                     </form>
                 </div>
             </div>

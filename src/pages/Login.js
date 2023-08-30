@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import useAuth from '../hooks/useAuth';
-import { Link, useNavigate } from 'react-router-dom';
-import { axiosPrivate } from '../api/axios';
+import React, { useState, useEffect } from 'react'
+import useAuth from '../hooks/useAuth'
+import { Link, useNavigate } from 'react-router-dom'
+import { axiosPrivate } from '../api/axios'
 
-const LOGIN_URL = '/auth';
+const LOGIN_URL = '/auth'
 
 export default function Login() {
 
-    const { auth, setAuth } = useAuth();
+    const { auth, setAuth } = useAuth()
 
-    const navigate = useNavigate();
-    const [user, setUser] = useState('');
-    const [pwd, setPwd] = useState('');
-    const usernameRegex = /^[a-z0-9]{4,12}$/;
+    const navigate = useNavigate()
+    const [user, setUser] = useState('')
+    const [pwd, setPwd] = useState('')
+    const usernameRegex = /^[a-z0-9]{4,12}$/
     const passwordRegex = /^[a-zA-Z\d!@#$%^&*()_+={};:<>?~.-]{6,20}$/
 
     function validateInput(inputValue, regex) {
@@ -21,16 +21,16 @@ export default function Login() {
 
     useEffect(() => {
         if (auth?.user) { navigate('/') }
-    }, [])
+    }, [auth?.user, navigate])
 
     const handleLogin = async (e) => {
         e.preventDefault()
         const lowercaseUsername = user.toLowerCase()
-        document.querySelector('#loginMatch').style.display = 'none';
-        document.getElementById('banned').style.display = 'none';
+        document.querySelector('#login-match').style.display = 'none'
+        document.getElementById('banned').style.display = 'none'
 
         if (!validateInput(lowercaseUsername, usernameRegex) || !validateInput(pwd, passwordRegex)) {
-            document.querySelector('#loginMatch').style.display = 'block';
+            document.querySelector('#login-match').style.display = 'block'
         } else {
             try {
                 const checkActive = await axiosPrivate.get(`/users/profiles/${lowercaseUsername}`)
@@ -42,7 +42,7 @@ export default function Login() {
                     setAuth({ "user": lowercaseUsername, pwd, accessToken, id });
                     navigate('/');
                 } else if (!checkActive?.data) {
-                    document.getElementById('loginMatch').style.display = 'block';
+                    document.getElementById('login-match').style.display = 'block';
                 } else {
                     document.getElementById('banned').style.display = 'block';
                 }
@@ -53,7 +53,7 @@ export default function Login() {
                 } else if (error.response?.status === 400) {
                     console.error('Missing Username or Password')
                 } else if (error.response?.status === 401) {
-                    document.querySelector('#loginMatch').style.display = 'block';
+                    document.querySelector('#login-match').style.display = 'block';
                     console.error('Unauthorized')
                 } else {
                     console.error('Login Failed')
@@ -63,14 +63,19 @@ export default function Login() {
     }
 
     return (
-        <div className='homeContent'>
-            <div id='loginPage'>
-                <div id='loginBox'>
-                    <form id='loginForm' onSubmit={handleLogin}>
-                        <div id='usernameDiv'>
-                            <label className='formLabel' htmlFor="user">Username:</label>
+        <div className='home-content'>
+            <div id='login-page'>
+                <div id='login-box'>
+                    <form id='login-form' onSubmit={handleLogin}>
+
+                        <div id='username-div'>
+
+                            <label className='form-label' htmlFor="user">
+                                Username:
+                            </label>
+
                             <input 
-                                id='usernameInput'
+                                id='username-input'
                                 autoComplete='off'
                                 autoFocus
                                 required 
@@ -79,29 +84,43 @@ export default function Login() {
                                 value={user}
                                 onChange={(e) => setUser(e.target.value)}
                             />
+
                         </div>
+
                         <div id='passwordDiv'>
-                            <label className='formLabel' htmlFor="pwd">Password:</label>
+
+                            <label className='form-label' htmlFor="pwd">
+                                Password:
+                            </label>
+
                             <input 
-                                className='passwordInput'
-                                id='passwordInput'
+                                className='password-input'
+                                id='password-input'
                                 required 
                                 type="password" 
                                 name='pwd'  
                                 value={pwd}
                                 onChange={(e) => setPwd(e.target.value)}
                             />
+
                         </div>
-                        <button id='loginSubmitButton' type='submit'>Log In</button>
-                        <div id='registerLink'>
+
+                        <button id='login-submit-button' type='submit'>
+                            Log In
+                        </button>
+
+                        <div id='register-link'>
                             Don't have an account? <Link to="/register">Register</Link>
                         </div>
-                        <div className='errMsg' style={{display: "none"}} id='loginMatch'>
+
+                        <div className='err-msg' style={{display: "none"}} id='login-match'>
                             Username and/or password does not match
                         </div>
-                        <div className='errMsg' style={{display: "none"}} id='banned'>
+
+                        <div className='err-msg' style={{display: "none"}} id='banned'>
                             You have been banned from the site
                         </div>
+                        
                     </form>
                 </div>
             </div>
