@@ -1,7 +1,7 @@
 import React from 'react'
-import { useParams } from "react-router-dom";
-import { axiosPrivate } from '../api/axios';
-import { useState, useEffect, useRef } from 'react';
+import { useParams } from "react-router-dom"
+import { axiosPrivate } from '../api/axios'
+import { useState, useEffect, useRef } from 'react'
 import Novice from '../images/novice.png'
 import Apprentice from '../images/apprentice.png'
 import Practitioner from '../images/practitioner.png'
@@ -20,7 +20,7 @@ const Profile = () => {
     const [bio, setBio] = useState('')
     const [isResponse, setIsResponse] = useState(true)
 
-    async function fetchData() {
+    const fetchData = async () => {
         const response = await axiosPrivate.get(USERS_URL) 
         const active = response?.data?.active
         if (active) {
@@ -32,7 +32,6 @@ const Profile = () => {
     }
 
     useEffect(() => {
-
         if (effectRan.current === false) {
             fetchData()
             return () => { effectRan.current = true }
@@ -126,7 +125,7 @@ const Profile = () => {
     if (!isResponse) {
         return (
             <div className='profile-content'>
-                <div style={{textAlign: "center"}}>
+                <div style={{ textAlign: "center" }}>
                     Error 404: User not found
                 </div>
             </div>

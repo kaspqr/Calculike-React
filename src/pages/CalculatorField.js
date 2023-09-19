@@ -2,38 +2,45 @@ import { useEffect, useRef, useState } from "react"
 import { axiosPrivate } from "../api/axios"
 import useAuth from "../hooks/useAuth"
 
-function CalculatorField() {
+const CalculatorField = () => {
 
-    const { auth } = useAuth();
+    const { auth } = useAuth()
 
-    const [firstNum, setFirstNum] = useState()
-    const [secondNum, setSecondNum] = useState()
-    const [answerValue, setAnswerValue] = useState()
+    useEffect(() => {
+        if (!auth?.id) alert("You are not logged in, therefore your hiscores will not be shown on the leaderboard.")
+    }, [])
+
+    const [firstNum, setFirstNum] = useState(null)
+    const [secondNum, setSecondNum] = useState(null)
+    const [answerValue, setAnswerValue] = useState(null)
     const [score, setScore] = useState(0)
-    const [counter, setCounter] = useState()
-    const [startButtonClicked, setStartButtonClicked] = useState(false);
-    const [selectValue, setSelectValue] = useState('')
+    const [counter, setCounter] = useState(null)
+    const [startButtonClicked, setStartButtonClicked] = useState(false)
+    const [selectValue, setSelectValue] = useState('combo')
     const finalSelectRef = useRef('')
     const multiplierRef = useRef()
-    const counterRef = useRef()
-    const [level, setLevel] = useState()
+    const [level, setLevel] = useState('all')
     const [answerLevel, setAnswerLevel] = useState(1)
+    const [counterVisible, setCounterVisible] = useState(false)
+    const [questionVisible, setQuestionVisible] = useState(false)
+    const [answerVisible, setAnswerVisible] = useState(false)
+    const [startVisible, setStartVisible] = useState(true)
+    const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false)
+    const [falseAnswer, setFalseAnswer] = useState(false)
 
     useEffect(() => {
         if (startButtonClicked) {
-            counterRef.current = false
-            if (level === '1') { setCounter(30) }
-            else if (level === '2') { setCounter(60) }
-            else if (level === '3') { setCounter(90) }
-            else if (level === 'all') { 
-                setCounter(180) 
-                counterRef.current = false
-            }
+
+            if (level === '1') setCounter(30)
+            else if (level === '2') setCounter(60)
+            else if (level === '3') setCounter(90)
+            else if (level === 'all') setCounter(180)
+
             generateRandomQuestion()
         }
     }, [startButtonClicked, level])
 
-    async function generateRandomQuestion() {
+    const generateRandomQuestion = async () => {
         if (selectValue === 'combo') {
             const random = Math.floor(Math.random() * 4) + 1
 
@@ -47,7 +54,6 @@ function CalculatorField() {
         else if (selectValue === 'divide') { finalSelectRef.current = '/' }
 
         if (level === 'all') {
-            if (counterRef.current === false) { multiplierRef.current = 10 }
             if (finalSelectRef.current === '+' || finalSelectRef.current === '-') {
                 if (counter > 150) { 
                     multiplierRef.current = 10 
@@ -102,7 +108,7 @@ function CalculatorField() {
             setFirstNum(Math.max(num1, num2))
             setSecondNum(Math.min(num1, num2))
         } else if (finalSelectRef.current === '/') { 
-            setFirstNum(num1 * num2)
+            setFirstNum(num1 * num2) // To ensure it is divideable, num1 cannot be random as it is in subtraction
             setSecondNum(num2)
         }
     }
@@ -116,18 +122,22 @@ function CalculatorField() {
             if (counter === 0) {
                 setCounter(180)
                 clearInterval(intervalId)
-                document.querySelector('#counter-div').style.display = 'none'
-                document.querySelector('#question-div').style.display = 'none'
-                document.querySelector('#answer-div').style.display = 'none'
-                document.querySelector('#start-div').style.display = 'block'
+                setCounterVisible(false)
+                setQuestionVisible(false)
+                setAnswerVisible(false)
+                setStartVisible(true)
                 setStartButtonClicked(false)
-                const response = await axiosPrivate.get(`/users/${auth?.id}`)
-                const currentUser = response.data
-                const gameLevel = selectValue + level
 
-                if (score > currentUser[gameLevel]) {
-                    await axiosPrivate.put(`/users/${auth?.id}`, { "id": currentUser._id, "gameLevel": gameLevel, "score": score })
+                if (auth?.id) {
+                    const response = await axiosPrivate.get(`/users/${auth?.id}`)
+                    const currentUser = response.data
+                    const gameLevel = selectValue + level
+
+                    if (score > currentUser[gameLevel]) {
+                        await axiosPrivate.put(`/users/${auth?.id}`, { "id": currentUser._id, "gameLevel": gameLevel, "score": score })
+                    }
                 }
+
             } else {
                 setCounter(counter - 1)
             }
@@ -140,39 +150,38 @@ function CalculatorField() {
 
 
 
-    function handleStartClick(e) {
+    const handleStartClick = (e) => {
         e.preventDefault()
-        setSelectValue(document.getElementById('calc-select').value)
-        setLevel(document.getElementById('level-select').value)
-        document.querySelector('#start-div').style.display = 'none'
-        document.querySelector('#counter-div').style.display = 'block'
-        document.querySelector('#question-div').style.display = 'block'
-        document.querySelector('#answer-div').style.display = 'block'
+        setCounter(180)
+        setStartVisible(false)
+        setCounterVisible(true)
+        setQuestionVisible(true)
+        setAnswerVisible(true)
         setScore(0)
         setAnswerValue('')
         setStartButtonClicked(true)
     }
 
     
-    function handleDigitClick(event) {
+    const handleDigitClick = (e) => {
         if (startButtonClicked === true) {
-            const digit = event.target.innerHTML
+            const digit = e.target.innerHTML
             setAnswerValue(answerValue + digit)
         }
     }
 
 
-    function handleDelClick() {
+    const handleDelClick = () => {
         if (startButtonClicked === true) { setAnswerValue(answerValue.slice(0, answerValue.length - 1)) }
     }
 
 
-    function handleClearClick() {
+    const handleClearClick = () => {
         if (startButtonClicked === true) { setAnswerValue('') }
     }
 
 
-    function checkAnswer() {
+    const checkAnswer = () => {
         if (finalSelectRef.current === '+') { return firstNum + secondNum }
         else if (finalSelectRef.current === '-') { return firstNum - secondNum }
         else if (finalSelectRef.current === '*') { return firstNum * secondNum }
@@ -180,7 +189,7 @@ function CalculatorField() {
     }
 
 
-    async function handleSubmitClick() {
+    const handleSubmitClick = async () => {
         if (startButtonClicked === true) {
 
             if (parseInt(answerValue) === checkAnswer() && counter > 0) {
@@ -222,9 +231,8 @@ function CalculatorField() {
                 setAnswerValue('')
                 generateRandomQuestion()
             } else if (counter > 0) { // Red background animation for wrong answer
-                document.getElementById('submitButton').disabled = true
-                document.querySelector('.page-content').style.animationName = 'wronganswer'
-                document.querySelector('.page-content').style.animationPlayState = 'running'
+                setSubmitButtonDisabled(true)
+                setFalseAnswer(true)
 
                 // 2 second fine
                 await new Promise(resolve => {
@@ -232,8 +240,8 @@ function CalculatorField() {
                 })
 
                 // Clear animation for next time use, enable submit button
-                document.querySelector('.page-content').style.animationName = 'none'
-                document.getElementById('submitButton').disabled = false
+                setFalseAnswer(false)
+                setSubmitButtonDisabled(false)
 
                 // Clear input and give the user a new question
                 setAnswerValue('')
@@ -245,33 +253,42 @@ function CalculatorField() {
 
     // HTML
 
-    return <div className="page-content">
+    return <div className="page-content" style={falseAnswer 
+        ? { animationName: "wronganswer", animationPlayState: "running" } 
+        : { animationName: "none" }}
+    >
         <div id="calculator-field">
 
             <div id="score-div">
                 Score: {score}
             </div>
 
-            <div style={{ display: 'none' }} id="counter-div">
+            <div style={counterVisible ? { display: 'block' } : { display: 'none' }} id="counter-div">
                 {counter}s
             </div>
 
-            <div style={{display: 'none'}} id="question-div">
+            <div style={questionVisible ? { display: 'block' } : { display: 'none' }} id="question-div">
                 {firstNum} {finalSelectRef.current} {secondNum} =
             </div>
 
-            <div style={{ display: 'none' }} id="answer-div">
+            <div style={answerVisible ? { display: 'block' } : { display: 'none' }} id="answer-div">
                 {answerValue}
             </div>
 
-            <div id="start-div">
+            <div style={startVisible ? { display: 'block' } : { display: 'none' }} id="start-div">
                 <form onSubmit={handleStartClick}>
 
                     <label className="off-screen" htmlFor="calc-select">
                         Choose Calculation Type
                     </label>
 
-                    <select name="calc-select" id="calc-select" className="calc-select">
+                    <select 
+                        value={selectValue} 
+                        onChange={(e) => setSelectValue(e.target.value)} 
+                        name="calc-select" 
+                        id="calc-select" 
+                        className="calc-select"
+                    >
                         <option className="calcOption" value="combo">Combo</option>
                         <option className="calcOption" value="add">Add</option>
                         <option className="calcOption" value="subtract">Subtract</option>
@@ -283,7 +300,13 @@ function CalculatorField() {
                         Choose Level
                     </label>
 
-                    <select name="level-select" id="level-select" className="calc-select">
+                    <select 
+                        name="level-select" 
+                        id="level-select" 
+                        className="calc-select"
+                        value={level}
+                        onChange={(e) => setLevel(e.target.value)}
+                    >
                         <option className="calcOption" value="all">All</option>
                         <option className="calcOption" value="3">Lvl 3</option>
                         <option className="calcOption" value="2">Lvl 2</option>
@@ -355,7 +378,14 @@ function CalculatorField() {
                         </td>
 
                         <td className="digit" colSpan={2} id="submit-td">
-                            <button id="submitButton" className="td-button" onClick={handleSubmitClick}>Submit</button>
+                            <button 
+                                disabled={submitButtonDisabled} 
+                                id="submitButton" 
+                                className="td-button" 
+                                onClick={handleSubmitClick}
+                            >
+                                Submit
+                            </button>
                         </td>
 
                     </tr>

@@ -1,4 +1,4 @@
-function Home() {
+const Home = () => {
 
     return (
         <div className="profile-content">
@@ -7,6 +7,13 @@ function Home() {
                     <div id="newsfeed">
 
                         <h2 className="home-h2">Newsfeed</h2>
+
+                        <h3 className="home-h3">September 19th, 2023</h3>
+
+                        <p className="home-p">
+                            Visitors are now able to play the game without logging in.
+                        </p>
+
                         <h3 className="home-h3">May 23rd, 2023</h3>
 
                         <p className="home-p">
@@ -32,4 +39,4 @@ function Home() {
     )
 }
 
-export default Home;
+export default Home

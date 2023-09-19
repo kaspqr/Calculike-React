@@ -1,31 +1,31 @@
-import { Outlet } from "react-router-dom";
-import { useEffect, useState } from "react";
-import useRefreshToken from '../hooks/useRefreshToken';
-import useAuth from "../hooks/useAuth";
-import RingLoader from "react-spinners/RingLoader";
+import { Outlet } from "react-router-dom"
+import { useEffect, useState } from "react"
+import useRefreshToken from '../hooks/useRefreshToken'
+import useAuth from "../hooks/useAuth"
+import RingLoader from "react-spinners/RingLoader"
 
 const Persistlogin = () => {
-    const refresh = useRefreshToken();
-    const { auth } = useAuth();
-    const [loading, setLoading] = useState(true);
+    const refresh = useRefreshToken()
+    const { auth } = useAuth()
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const verifyRefreshToken = async () => {
           try {
-            await refresh();
+            await refresh()
           } catch (err) {
-            console.error(err);
+            console.error(err)
           } finally {
-            setLoading(false);
+            setLoading(false)
           }
-        };
+        }
       
         if (!auth?.user) {
-          verifyRefreshToken();
+          verifyRefreshToken()
         } else {
-          setLoading(false);
+          setLoading(false)
         }
-      }, [auth?.user, refresh]);
+      }, [auth?.user, refresh])
 
     if (loading) {
         return <div id="loading-spinner"><RingLoader 

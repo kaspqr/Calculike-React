@@ -15,35 +15,44 @@ const ChangePwd = () => {
     const [newPwdConfirm, setNewPwdConfirm] = useState('')
     const passwordRegex = /^[a-zA-Z\d!@#$%^&*()_+={};:<>?~.-]{6,20}$/
     const regex = "!@#$%^&*()_+={};:<>?~.-"
+    const [oldPwdErrVisible, setOldPwdErrVisible] = useState(false)
+    const [newPwdMatchErrVisible, setNewPwdMatchErrVisible] = useState(false)
+    const [newPwdErrVisible, setNewPwdErrVisible] = useState(false)
+    const [successMsgVisible, setSuccessMsgVisible] = useState(false)
 
-    function validateInput(inputValue, regex) {
+    const validateInput = (inputValue, regex) => {
         return regex.test(inputValue)
     }
 
-    async function fetchData() {
+    const fetchData = async () => {
         const response = await axiosPrivate.get(USERS_URL) 
         setCurrentUser(response.data)
     }
 
     useEffect(() => {
-
         if (effectRan.current === false) {
             fetchData()
             return () => { effectRan.current = true }
         }
     }, [])
 
-    async function handleChangePwd(e) {
+    const handleChangePwd = async (e) => {
         e.preventDefault()
-        document.getElementById('old-pwd-check').style.display = 'none'
-        document.getElementById('new-pwd-match').style.display = 'none'
-        document.getElementById('new-pwd-length-err').style.display = 'none'
-        document.getElementById('pwd-changed').style.display = 'none'
+
+        setOldPwdErrVisible(false)
+        setNewPwdMatchErrVisible(false)
+        setNewPwdErrVisible(false)
+        setSuccessMsgVisible(false)
+
         const isValidPwd = validateInput(newPwd, passwordRegex)
         const isOldPwdValid = validateInput(password, passwordRegex)
-        if (!isOldPwdValid) { document.getElementById('old-pwd-check').style.display = 'block' }
-        if (newPwd !== newPwdConfirm) { document.getElementById('new-pwd-match').style.display = 'block' }
-        if (!isValidPwd) { document.getElementById('new-pwd-length-err').style.display = 'block' }
+
+        if (!isOldPwdValid) setOldPwdErrVisible(true)
+
+        if (newPwd !== newPwdConfirm) setNewPwdMatchErrVisible(true)
+
+        if (!isValidPwd) setNewPwdErrVisible(true)
+
         if (newPwd.length >= 6 && newPwd === newPwdConfirm && isValidPwd && isOldPwdValid) {
             try {
                 const accessToken = auth?.accessToken
@@ -52,16 +61,16 @@ const ChangePwd = () => {
                 const user = response.data.user
                 const pwd = response.data.pwd
                 setAuth({ user, pwd, accessToken, id })
-                document.getElementById('pwd-changed').style.display = 'block'
+                setSuccessMsgVisible(true)
                 setPassword('')
                 setNewPwd('')
                 setNewPwdConfirm('')
             } catch(error) {
                 if (!error?.response) {
-                    console.error('No Server Response');
+                    console.error('No Server Response')
                 } else if (error.response?.status === 401) {
                     console.error('Current password is incorrect')
-                    document.getElementById('old-pwd-check').style.display = 'block'
+                    setOldPwdErrVisible(true)
                 }
             }
         }
@@ -134,21 +143,37 @@ const ChangePwd = () => {
                             Changed your mind? <Link to="/settings">Go back</Link>
                         </div>
 
-                        <div className='err-msg' style={{display: "none"}} id='new-pwd-match'>
+                        <div 
+                            className='err-msg' 
+                            style={newPwdMatchErrVisible ? { display: "block" } : { display: "none" }} 
+                            id='new-pwd-match'
+                        >
                             New passwords do not match
                         </div>
 
-                        <div className='err-msg' style={{display: "none"}} id='old-pwd-check'>
+                        <div 
+                            className='err-msg' 
+                            style={oldPwdErrVisible ? { display: "block" } : { display: "none" }} 
+                            id='old-pwd-check'
+                        >
                             The current password you entered was incorrect
                         </div>
 
-                        <div className='err-msg' style={{display: "none"}} id='new-pwd-length-err'>
+                        <div 
+                            className='err-msg' 
+                            style={newPwdErrVisible ? { display: "block" } : {display: "none"}} 
+                            id='new-pwd-length-err'
+                        >
                             Password must be 6-20 characters long and may only contain letters, numbers and the following digits:
                             <br />
                             {regex}
                         </div>
 
-                        <div className='success-msg' style={{display: "none"}} id='pwd-changed'>
+                        <div 
+                            className='success-msg' 
+                            style={successMsgVisible ? { display: "block" } : {display: "none"}} 
+                            id='pwd-changed'
+                        >
                             Your password was changed successfully
                         </div>
 

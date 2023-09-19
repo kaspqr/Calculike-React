@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMedal, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
-function Hiscores() {
+const Hiscores = () => {
     const effectRan = useRef(false)
     const USERS_URL = '/users'
     const searchRef = useRef('comboall')
     const [hiscoreUsers, setHiscoreUsers] = useState([])
+    const [levelType, setLevelType] = useState('combo')
+    const [level, setLevel] = useState('all')
 
-    async function fetchData() {
+    const fetchData = async () => {
         const response = await axiosPrivate.get(USERS_URL) 
         const filteredResponse = response.data.filter(user => user[searchRef.current] > 0)
         const activeResponse = filteredResponse.filter(user => user.active === true)
@@ -27,11 +29,9 @@ function Hiscores() {
         }
     }, [])
 
-    function handleHiscoreSearch(e) {
+    const handleHiscoreSearch = (e) => {
         e.preventDefault()
-        const calcSelect = document.getElementById('calc-select').value
-        const levelSelect = document.getElementById('level-select').value
-        searchRef.current = (calcSelect + levelSelect)
+        searchRef.current = (levelType + level)
         fetchData()
     }
 
@@ -46,7 +46,13 @@ function Hiscores() {
                                 Select Type of Calculation
                             </label>
 
-                            <select name='calc-select' id="calc-select" className="hs-select">
+                            <select 
+                                value={levelType} 
+                                onChange={(e) => setLevelType(e.target.value)} 
+                                name='calc-select' 
+                                id="calc-select" 
+                                className="hs-select"
+                            >
                                 <option className="calcOption" value="combo">Combo</option>
                                 <option className="calcOption" value="add">Add</option>
                                 <option className="calcOption" value="subtract">Subtract</option>
@@ -58,7 +64,13 @@ function Hiscores() {
                                 Select Level
                             </label>
 
-                            <select name='level-select' id="level-select" className="hs-select">
+                            <select 
+                                value={level} 
+                                onChange={(e) => setLevel(e.target.value)} 
+                                name='level-select' 
+                                id="level-select" 
+                                className="hs-select"
+                            >
                                 <option className="calcOption" value="all">All</option>
                                 <option className="calcOption" value="3">Lvl 3</option>
                                 <option className="calcOption" value="2">Lvl 2</option>

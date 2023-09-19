@@ -1,8 +1,8 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
-import { axiosPrivate } from '../api/axios';
-import { useState, useEffect, useRef } from 'react';
-import useAuth from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom'
+import { axiosPrivate } from '../api/axios'
+import { useState, useEffect, useRef } from 'react'
+import useAuth from '../hooks/useAuth'
 
 const Settings = () => {
 
@@ -11,6 +11,8 @@ const Settings = () => {
     const navigate = useNavigate()
     const effectRan = useRef(false)
     const USERS_URL = `/users/${auth.id}`
+    const [errMsgVisible, setErrMsgVisible] = useState(false)
+    const [successMsgVisible, setSuccessMsgVisible] = useState(false)
 
     async function fetchData() {
         const response = await axiosPrivate.get(USERS_URL) 
@@ -20,28 +22,22 @@ const Settings = () => {
     }
 
     useEffect(() => {
-
         if (effectRan.current === false) {
             fetchData()
             return () => { effectRan.current = true }
         }
     }, [])
 
-    function handlePasswordChange(e) {
+    const handleBioChange = async (e) => {
         e.preventDefault()
-        navigate('/changepwd')
-    }
-
-    async function handleBioChange(e) {
-        e.preventDefault()
-        document.getElementById('empty-bio').style.display = 'none'
-        document.getElementById('bio-changed').style.display = 'none'
+        setErrMsgVisible(false)
+        setSuccessMsgVisible(false)
         if (!bio.length) {
-            document.getElementById('empty-bio').style.display = 'block'
+            setErrMsgVisible(true)
         } else {
             const response = await axiosPrivate.put(USERS_URL, { "id": auth.id, "bio": bio })
             if (response.data) {
-                document.getElementById('bio-changed').style.display = 'block'
+                setSuccessMsgVisible(true)
             }
         }
     }
@@ -51,7 +47,7 @@ const Settings = () => {
         <div className='home-content'>
             <div id='login-page'>
                 <div id='login-box'>
-                    <form onSubmit={handlePasswordChange} className='change-settings' id='settings-password'>
+                    <form onSubmit={() => navigate('/changepwd')} className='change-settings' id='settings-password'>
 
                         <div>
                             <label className='form-label' htmlFor="change-password">
@@ -91,11 +87,11 @@ const Settings = () => {
                             Update Bio
                         </button>
 
-                        <div id='empty-bio' style={{ display: "none" }} className='err-msg'>
+                        <div id='empty-bio' style={errMsgVisible ? { display: "block" } : { display: "none" }} className='err-msg'>
                             Bio cannot be empty.
                         </div>
 
-                        <div id='bio-changed' style={{ display: "none" }} className='success-msg'>
+                        <div id='bio-changed' style={successMsgVisible ? { display: "block" } : { display: "none" }} className='success-msg'>
                             Your bio has been changed successfully.
                         </div>
 

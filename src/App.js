@@ -14,7 +14,7 @@ import ChangePwd from './pages/ChangePwd'
 import About from './pages/About'
 import Users from './pages/Users'
 
-function App() {
+const App = () => {
 
   return (
     <Routes>
@@ -24,12 +24,12 @@ function App() {
           <Route index element={<Home />} />
 
           <Route element={<RequireAuth />}>
-            <Route path="train" element={<CalculatorField />} />
             <Route path="changepwd" element={<ChangePwd />} />
             <Route path="settings" element={<Settings />} />
           </Route>
 
           <Route path="hiscores" element={<Hiscores />} />
+          <Route path="train" element={<CalculatorField />} />
           <Route path="about" element={<About />} />
           <Route exact path="profiles/:id" element={<Profile />} />
           <Route path="register" element={<Register />} />

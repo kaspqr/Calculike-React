@@ -5,7 +5,7 @@ import { axiosPrivate } from '../api/axios'
 
 const LOGIN_URL = '/auth'
 
-export default function Login() {
+const Login = () => {
 
     const { auth, setAuth } = useAuth()
 
@@ -14,9 +14,11 @@ export default function Login() {
     const [pwd, setPwd] = useState('')
     const usernameRegex = /^[a-z0-9]{4,12}$/
     const passwordRegex = /^[a-zA-Z\d!@#$%^&*()_+={};:<>?~.-]{6,20}$/
+    const [errVisible, setErrVisible] = useState(false)
+    const [bannedTextVisible, setBannedTextVisible] = useState(false)
 
-    function validateInput(inputValue, regex) {
-        return regex.test(inputValue);
+    const validateInput = (inputValue, regex) => {
+        return regex.test(inputValue)
     }
 
     useEffect(() => {
@@ -26,11 +28,11 @@ export default function Login() {
     const handleLogin = async (e) => {
         e.preventDefault()
         const lowercaseUsername = user.toLowerCase()
-        document.querySelector('#login-match').style.display = 'none'
-        document.getElementById('banned').style.display = 'none'
+        setErrVisible(false)
+        setBannedTextVisible(false)
 
         if (!validateInput(lowercaseUsername, usernameRegex) || !validateInput(pwd, passwordRegex)) {
-            document.querySelector('#login-match').style.display = 'block'
+            setErrVisible(true)
         } else {
             try {
                 const checkActive = await axiosPrivate.get(`/users/profiles/${lowercaseUsername}`)
@@ -42,9 +44,9 @@ export default function Login() {
                     setAuth({ "user": lowercaseUsername, pwd, accessToken, id });
                     navigate('/');
                 } else if (!checkActive?.data) {
-                    document.getElementById('login-match').style.display = 'block';
+                    setErrVisible(true)
                 } else {
-                    document.getElementById('banned').style.display = 'block';
+                    setBannedTextVisible(true)
                 }
 
             } catch (error) {
@@ -53,7 +55,7 @@ export default function Login() {
                 } else if (error.response?.status === 400) {
                     console.error('Missing Username or Password')
                 } else if (error.response?.status === 401) {
-                    document.querySelector('#login-match').style.display = 'block';
+                    setErrVisible(true)
                     console.error('Unauthorized')
                 } else {
                     console.error('Login Failed')
@@ -113,11 +115,11 @@ export default function Login() {
                             Don't have an account? <Link to="/register">Register</Link>
                         </div>
 
-                        <div className='err-msg' style={{display: "none"}} id='login-match'>
+                        <div className='err-msg' style={errVisible ? { display: "block" } : { display: "none" }} id='login-match'>
                             Username and/or password does not match
                         </div>
 
-                        <div className='err-msg' style={{display: "none"}} id='banned'>
+                        <div className='err-msg' style={bannedTextVisible ? { display: "block" } : { display: "none" }} id='banned'>
                             You have been banned from the site
                         </div>
                         
@@ -127,3 +129,5 @@ export default function Login() {
         </div>
     )
 }
+
+export default Login
