@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+
 import CalculatorField from "./pages/CalculatorField"
 import Home from "./pages/Home"
 import Layout from "./pages/Layout"
@@ -15,19 +16,15 @@ import About from './pages/About'
 import Users from './pages/Users'
 
 const App = () => {
-
   return (
     <Routes>
       <Route element={<Persistlogin />}>
         <Route path="/" element={<Layout />}>
-
           <Route index element={<Home />} />
-
           <Route element={<RequireAuth />}>
             <Route path="changepwd" element={<ChangePwd />} />
             <Route path="settings" element={<Settings />} />
           </Route>
-
           <Route path="hiscores" element={<Hiscores />} />
           <Route path="train" element={<CalculatorField />} />
           <Route path="about" element={<About />} />
@@ -36,7 +33,6 @@ const App = () => {
           <Route path="login" element={<Login />} />
           <Route path="*" element={<NoPage />} />
           <Route path="users" element={<Users />} />
-
         </Route>
       </Route>
     </Routes>

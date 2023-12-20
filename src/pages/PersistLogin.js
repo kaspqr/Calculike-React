@@ -1,45 +1,44 @@
-import { Outlet } from "react-router-dom"
 import { useEffect, useState } from "react"
+import { Outlet } from "react-router-dom"
+
 import useRefreshToken from '../hooks/useRefreshToken'
 import useAuth from "../hooks/useAuth"
 import RingLoader from "react-spinners/RingLoader"
 
 const Persistlogin = () => {
-    const refresh = useRefreshToken()
-    const { auth } = useAuth()
-    const [loading, setLoading] = useState(true)
+  const refresh = useRefreshToken()
+  const { auth } = useAuth()
 
-    useEffect(() => {
-        const verifyRefreshToken = async () => {
-          try {
-            await refresh()
-          } catch (err) {
-            console.error(err)
-          } finally {
-            setLoading(false)
-          }
-        }
-      
-        if (!auth?.user) {
-          verifyRefreshToken()
-        } else {
-          setLoading(false)
-        }
-      }, [auth?.user, refresh])
+  const [loading, setLoading] = useState(true)
 
-    if (loading) {
-        return <div id="loading-spinner"><RingLoader 
-            color="#000"
-            loading={true}
-            size={150}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-        /></div>
+  useEffect(() => {
+    const verifyRefreshToken = async () => {
+      try {
+        await refresh()
+      } catch (err) {
+        console.error(err)
+      } finally {
+        setLoading(false)
+      }
     }
 
-    return (
-        <Outlet />
-    )
+    if (!auth?.user) verifyRefreshToken()
+    else setLoading(false)
+  }, [auth?.user, refresh])
+
+  if (loading) {
+    return <div id="loading-spinner">
+      <RingLoader
+        color="#000"
+        loading={true}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+    </div>
+  }
+
+  return <Outlet />
 }
 
 export default Persistlogin
