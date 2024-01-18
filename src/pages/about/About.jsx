@@ -95,7 +95,7 @@ const About = () => {
             </p>
             <p>
               If your answer is incorrect, your score will stay the same and the
-              background color of the page will go red. Simultaneously, the
+              background color of the page will go black. Simultaneously, the
               'Submit' button will be disabled for the next 2 seconds. When the
               2 seconds is over, the page's background color will turn back to
               normal and you will be presented with a new question.
