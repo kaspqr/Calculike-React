@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import { AuthProvider } from './context/AuthProvider'
 import './index.css'
+import "./assets/css/argon-dashboard-pro-react.css"
+import "./assets/css/reactTable.css"
 
 import { disableReactDevTools } from '@fvilers/disable-react-devtools'
 
