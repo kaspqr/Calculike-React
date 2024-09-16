@@ -1,30 +1,33 @@
 import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import RingLoader from "react-spinners/RingLoader";
 
 import useRefreshToken from "../../hooks/useRefreshToken";
 import useAuth from "../../hooks/useAuth";
-import RingLoader from "react-spinners/RingLoader";
 
 const Persistlogin = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
   const refresh = useRefreshToken();
-  const { auth } = useAuth();
+  const { setAuth } = useAuth();
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const verifyRefreshToken = async () => {
-      try {
-        await refresh();
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
+      const newAccessToken = await refresh();
+
+      if (!newAccessToken) {
+        setAuth({})
+        navigate('/login')
       }
+      
+      setLoading(false);
     };
 
-    if (!auth?.username) verifyRefreshToken();
-    else setLoading(false);
-  }, [auth?.username, refresh]);
+    verifyRefreshToken();
+    setLoading(false);
+  }, [location?.pathname]);
 
   if (loading) {
     return (
@@ -40,7 +43,7 @@ const Persistlogin = () => {
     );
   }
 
-  return <Outlet />;
+  return <Outlet />
 };
 
-export default Persistlogin;
+export default Persistlogin

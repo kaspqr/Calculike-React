@@ -83,9 +83,9 @@ const Layout = () => {
                 >
                   <span
                     style={{ cursor: "pointer" }}
-                    onClick={() => navigate(`/profiles/${auth.username}`)}
+                    onClick={() => navigate(`/profiles/${auth?.username}`)}
                   >
-                    {auth.username}
+                    {auth?.username}
                   </span>
                 </Col>
               )}
@@ -164,9 +164,9 @@ const Layout = () => {
                           cursor: "pointer",
                           color: "white",
                         }}
-                        onClick={() => navigate(`/profiles/${auth.username}`)}
+                        onClick={() => navigate(`/profiles/${auth?.username}`)}
                       >
-                        {auth.username}
+                        {auth?.username}
                       </span>
                     </Col>
                   </>

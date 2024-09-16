@@ -28,10 +28,9 @@ const CalculatorField = () => {
   const multiplierRef = useRef();
 
   useEffect(() => {
-    if (!auth?.id)
-      alerts.warningAlert(
-        "You are not logged in, therefore your hiscores will not be shown on the leaderboard."
-      );
+    if (!auth?.userId) alerts.warningAlert(
+      "You are not logged in, therefore your hiscores will not be shown on the leaderboard."
+    );
   }, []);
 
   useEffect(() => {
@@ -54,23 +53,27 @@ const CalculatorField = () => {
         setAnswerVisible(false);
         setStartVisible(true);
         setStartButtonClicked(false);
-        if (auth?.id) {
-          const response = await axiosPrivate.get(`/users/${auth?.id}`);
+        if (auth?.userId) {
+          const response = await axiosPrivate.get(`/users/${auth?.userId}`);
           const currentUser = response.data;
           const gameLevel = selectValue + level;
           if (score > currentUser[gameLevel]) {
-            await axiosPrivate.put(`/users/${auth?.id}`, {
-              id: currentUser._id,
-              gameLevel,
-              score,
-            });
+            await axiosPrivate.patch(`/users/${auth?.userId}`,
+              { id: auth?.userId, gameLevel, score },
+              { headers: { Authorization: `Bearer ${auth?.accessToken}` } }
+            );
+
+            await axiosPrivate.patch(`/hiscores`,
+              { userId: auth?.userId, gameType: gameLevel, score },
+              { headers: { Authorization: `Bearer ${auth?.accessToken}` } }
+            )
           }
         }
       } else setCounter(counter - 1);
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [counter, auth?.id, level, score, selectValue]);
+  }, [counter, auth?.userId, level, score, selectValue]);
 
   const generateRandomQuestion = async () => {
     if (selectValue === "combo") {

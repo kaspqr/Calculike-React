@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Select from "react-select";
 import { Button, Card, CardBody, CardHeader, Col, Row } from "reactstrap";
 
@@ -11,42 +11,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const Hiscores = () => {
-  const searchRef = useRef("");
-
-  const [hiscoreUsers, setHiscoreUsers] = useState([]);
+  const [hiscores, setHiscores] = useState([]);
   const [levelType, setLevelType] = useState(undefined);
   const [level, setLevel] = useState(undefined);
   const [levelTypeLabel, setLevelTypeLabel] = useState(undefined);
   const [levelLabel, setLevelLabel] = useState(undefined);
   const [resultsLabel, setResultsLabel] = useState(undefined);
 
-  const USERS_URL = "/users";
+  const fetchData = async (url) => {
+    const response = await axiosPrivate.get(url);
 
-  const fetchData = async () => {
-    const response = await axiosPrivate.get(USERS_URL);
-    const filteredResponse = response.data.filter(
-      (user) => user[searchRef.current] > 0
-    );
-    const activeResponse = filteredResponse.filter(
-      (user) => user.active === true
-    );
-    const finalResponse = activeResponse.sort(
-      (a, b) => b[searchRef.current] - a[searchRef.current]
-    );
-    const finalResult = finalResponse.slice(0, 10);
-    setHiscoreUsers(finalResult);
-    if (finalResult?.length === 0) {
-      alerts.warningAlert(
-        "There are no hiscores for the level of this gamemode yet."
-      );
+    const scores = response?.data?.scores
+
+    setHiscores(scores);
+
+    if (scores === 0) {
+      alerts.warningAlert("There are no hiscores for the level of this gamemode yet.")
     }
   };
 
   const handleHiscoreSearch = (e) => {
     e.preventDefault();
-    searchRef.current = levelType + level;
+
+    const HISCORES_URL = `/hiscores/${levelType + level}`;
+
     setResultsLabel(`${levelTypeLabel} Level ${levelLabel}`);
-    fetchData();
+
+    fetchData(HISCORES_URL);
   };
 
   return (
@@ -97,17 +88,17 @@ const Hiscores = () => {
                 </Col>
               </Row>
             </form>
-            {hiscoreUsers?.length > 0 && (
+            {hiscores?.length <= 0 ? null : (
               <Row className="mt-4">
                 <Col>
                   <Card>
                     <CardHeader>{resultsLabel}</CardHeader>
                     <CardBody>
-                      {hiscoreUsers.map((user, i) => (
+                      {hiscores.map((hiscore, i) => (
                         <HiscoreUser
-                          key={i}
-                          user={user}
-                          searchRef={searchRef}
+                          key={hiscore}
+                          user={hiscore?.user}
+                          gameType={levelType + level}
                           i={i}
                         />
                       ))}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode"
 import {
   Button,
   Card,
@@ -52,14 +53,29 @@ const Register = () => {
         setUsername("");
         setPassword("");
         setPasswordCheck("");
+
         const loginResponse = await axiosPrivate.post(LOGIN_URL, {
           username: lowercaseUsername,
           password,
         });
+
         const accessToken = loginResponse?.data?.accessToken;
-        const id = loginResponse?.data?.id;
-        setAuth({ username: lowercaseUsername, password, accessToken, id });
-        navigate("/");
+
+        if (accessToken) {
+          const decoded = jwtDecode(accessToken)
+
+          const {
+            username,
+            bio,
+            userId
+          } = decoded.UserInfo
+
+          setAuth({ username, bio, userId, accessToken });
+
+          navigate("/");
+        } else {
+          alerts.errorAlert("Something went wrong")
+        }
       } catch (err) {
         if (!err?.response) {
           console.error("No server response");

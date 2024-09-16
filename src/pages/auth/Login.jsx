@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode"
 import {
   Button,
   Card,
@@ -53,9 +54,19 @@ const Login = () => {
             password,
           });
           const accessToken = response?.data?.accessToken;
-          const id = response?.data?.id;
-          setAuth({ username: lowercaseUsername, password, accessToken, id });
-          navigate("/");
+          if (accessToken) {
+            const decoded = jwtDecode(accessToken)
+
+            const {
+              username,
+              bio,
+              userId
+            } = decoded.UserInfo
+
+            setAuth({ username, bio, userId, accessToken });
+            
+            navigate("/");
+          }
         } else if (!checkActive?.data)
           alerts.errorAlert("Invalid login credentials");
         else alerts.errorAlert("This account is banned");

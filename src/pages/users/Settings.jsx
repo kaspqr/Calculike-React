@@ -21,7 +21,7 @@ const Settings = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
-  const USERS_URL = `/users/${auth.id}`;
+  const USERS_URL = `/users/${auth.userId}`;
   const passwordRegex = /^[a-zA-Z\d!@#$%^&*()_+={};:<>?~.-]{6,20}$/;
   const regex = "!@#$%^&*()_+={};:<>?~.-";
 
@@ -61,8 +61,8 @@ const Settings = () => {
                       `${regex}`
                   );
                 } else {
-                  const response = await axiosPrivate.put(USERS_URL, {
-                    id: auth.id,
+                  const response = await axiosPrivate.patch(USERS_URL, {
+                    id: auth.userId,
                     password,
                     newPassword,
                     bio,
