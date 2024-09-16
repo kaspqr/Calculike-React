@@ -64,7 +64,7 @@ const CalculatorField = () => {
             );
 
             await axiosPrivate.patch(`/hiscores`,
-              { userId: auth?.userId, gameType: gameLevel, score },
+              { userId: auth?.userId, type: selectValue, level, score },
               { headers: { Authorization: `Bearer ${auth?.accessToken}` } }
             )
           }
