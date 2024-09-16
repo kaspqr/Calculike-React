@@ -94,7 +94,7 @@ const Hiscores = () => {
                   <Card>
                     <CardHeader>{resultsLabel}</CardHeader>
                     <CardBody>
-                      {hiscores.map((hiscore, i) => (
+                      {hiscores?.map((hiscore, i) => (
                         <HiscoreUser
                           key={hiscore}
                           user={hiscore?.user}

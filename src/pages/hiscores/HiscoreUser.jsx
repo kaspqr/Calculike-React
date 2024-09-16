@@ -11,7 +11,7 @@ const HiscoreUser = ({ user, gameType, i }) => {
 
   const fetchData = async () => {
     const response = await axiosPrivate.get(USER_URL);
-    if (response) setCurrentUser(response.data)
+    if (response) setCurrentUser(response?.data)
   }
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const HiscoreUser = ({ user, gameType, i }) => {
       <div style={{ display: "flex", width: "100%", maxWidth: "500px" }}>
         <span>#{i + 1}</span>
         <u
-          onClick={() => navigate(`/profiles/${currentUser.username}`)}
+          onClick={() => navigate(`/profiles/${currentUser?.username}`)}
           className="ml-4"
           style={{ cursor: "pointer" }}
         >
